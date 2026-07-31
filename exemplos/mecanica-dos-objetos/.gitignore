@@ -1,0 +1,9 @@
+# Binarios e executaveis compilacao GCC
+*.exe
+*.out
+*.o
+*.a
+*.so
+*.dylib
+procedural_app
+oo_app

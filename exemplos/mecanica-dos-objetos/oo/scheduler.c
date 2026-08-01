@@ -12,12 +12,13 @@
 #include "scheduler.h"
 #include <stddef.h>
 
-void scheduler_add_process(Scheduler *self, Process *process) {
+void scheduler_add_process(Scheduler *self, const char *name,
+                           uint32_t burst_time) {
   if (self == NULL || self->vtable == NULL ||
       self->vtable->add_process == NULL) {
     return;
   }
-  self->vtable->add_process(self, process);
+  self->vtable->add_process(self, name, burst_time);
 }
 
 Process *scheduler_tick(Scheduler *self) {

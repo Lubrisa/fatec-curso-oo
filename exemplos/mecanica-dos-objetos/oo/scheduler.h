@@ -11,7 +11,7 @@ typedef struct Scheduler Scheduler;
  * Contém os ponteiros de função para despacho dinâmico (late binding).
  */
 typedef struct SchedulerVTable {
-  void (*add_process)(Scheduler *self, Process *process);
+  void (*add_process)(Scheduler *self, const char *name, uint32_t burst_time);
   Process *(*tick)(Scheduler *self);
   bool (*has_pending)(const Scheduler *self);
   void (*destroy)(Scheduler *self);
@@ -30,9 +30,11 @@ struct Scheduler {
  * @brief Adiciona um processo à fila do escalonador.
  *
  * @param self Ponteiro para a instância do escalonador.
- * @param process Ponteiro para o objeto processo a ser adicionado.
+ * @param name Nome do programa.
+ * @param burst_time Tempo de CPU necessário (em ticks).
  */
-void scheduler_add_process(Scheduler *self, Process *process);
+void scheduler_add_process(Scheduler *self, const char *name,
+                           uint32_t burst_time);
 
 /**
  * @brief Executa um ciclo/tick de CPU sobre o escalonador.

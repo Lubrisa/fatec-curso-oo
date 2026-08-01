@@ -86,13 +86,17 @@ static Process *run_round_robin_tick(Scheduler *scheduler) {
 
   if (current->remaining_time == 0) {
     current->state = PROCESS_STATE_FINISHED;
-    scheduler->current_slice_ticks = 0;
-    scheduler->current_index = get_next_circular_index(
-        scheduler->current_index, scheduler->process_count);
-  } else if (scheduler->current_slice_ticks >= scheduler->quantum) {
-    /* Se o quantum expirou, devolve o processo para READY e avança para o
-     * próximo */
+  } else {
     current->state = PROCESS_STATE_READY;
+  }
+
+  /*
+   * Avança para o próximo processo da fila se o atual tiver finalizado
+   * ou se a quantidade de ticks cedidos ao processo atingiu/excedeu o quantum
+   * fornecido.
+   */
+  if (current->state == PROCESS_STATE_FINISHED ||
+      scheduler->current_slice_ticks >= scheduler->quantum) {
     scheduler->current_slice_ticks = 0;
     scheduler->current_index = get_next_circular_index(
         scheduler->current_index, scheduler->process_count);

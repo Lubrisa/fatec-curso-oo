@@ -80,12 +80,12 @@ static Process *rr_tick(Scheduler *self) {
   process_execute(current, 1);
   rr->current_slice_ticks++;
 
-  if (process_is_finished(current)) {
-    rr->current_slice_ticks = 0;
-    rr->current_index =
-        get_next_circular_index(rr->current_index, rr->process_count);
-  } else if (rr->current_slice_ticks >= rr->quantum) {
-    /* Quantum expirou: reseta o contador e avança para o próximo processo */
+  /*
+   * Avança para o próximo processo da fila se o atual tiver finalizado
+   * ou se a quantidade de ticks cedidos ao processo atingiu/excedeu o quantum
+   * fornecido.
+   */
+  if (process_is_finished(current) || rr->current_slice_ticks >= rr->quantum) {
     rr->current_slice_ticks = 0;
     rr->current_index =
         get_next_circular_index(rr->current_index, rr->process_count);

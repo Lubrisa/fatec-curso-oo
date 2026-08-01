@@ -107,10 +107,10 @@ O contrato público desacoplado é composto por uma tabela de métodos virtuais
 
 ```c
 typedef struct SchedulerVTable {
-    void (*add_process)(void* self, Process* process);
-    Process* (*tick)(void* self);
-    bool (*has_pending)(void* self);
-    void (*destroy)(void* self);
+    void (*add_process)(Scheduler* self, const char* name, uint32_t burst_time);
+    Process* (*tick)(Scheduler* self);
+    bool (*has_pending)(const Scheduler* self);
+    void (*destroy)(Scheduler* self);
 } SchedulerVTable;
 
 typedef struct {

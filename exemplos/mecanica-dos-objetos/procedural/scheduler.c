@@ -55,7 +55,13 @@ static size_t get_next_circular_index(size_t current_index,
 static Process *run_round_robin_tick(Scheduler *scheduler) {
   size_t searched = 0;
 
-  /* Busca o próximo processo pendente na fila circular */
+  /*
+   * Busca o próximo processo pendente na fila circular.
+   * Usamos a variável 'searched' para registrar quantos elementos já foram
+   * inspecionados, evitando um loop infinito caso todos os processos já tenham
+   * sido finalizados (pois o avanço circular por módulo % continua dando voltas
+   * indefinidamente).
+   */
   while (searched < scheduler->process_count &&
          scheduler->processes[scheduler->current_index].state ==
              PROCESS_STATE_FINISHED) {

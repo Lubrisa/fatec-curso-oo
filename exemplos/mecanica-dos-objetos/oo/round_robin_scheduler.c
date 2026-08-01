@@ -56,7 +56,13 @@ static Process *rr_tick(Scheduler *self) {
   }
 
   size_t searched = 0;
-  /* Busca o próximo processo pendente na fila circular */
+  /*
+   * Busca o próximo processo pendente na fila circular.
+   * Usamos a variável 'searched' para registrar quantos elementos já foram
+   * inspecionados, evitando um loop infinito caso todos os processos já tenham
+   * sido finalizados (pois o avanço circular por módulo % continua dando voltas
+   * indefinidamente).
+   */
   while (searched < rr->process_count &&
          process_is_finished(rr->processes[rr->current_index])) {
     rr->current_index =

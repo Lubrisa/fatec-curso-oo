@@ -94,10 +94,9 @@ typedef struct {
 
 ##### 2.2.1.2 Operações
 
-- `procedural_scheduler_init(scheduler, type, quantum)`: Inicializa a estrutura
-  universal.
-- `procedural_scheduler_tick(scheduler)`: Executa um ciclo utilizando um bloco
-  `switch(scheduler->type)` interno.
+- `scheduler_tick(scheduler)`: Única operação pública fornecida pelo módulo
+  procedural do escalonador, responsável por ditar qual fluxo de escalonamento
+  será executado a cada ciclo de CPU.
 
 #### 2.2.2 Versão Orientada a Objetos
 
@@ -379,7 +378,7 @@ Turnaround Médio: 10.33 ticks
 Pontos fundamentais a serem explorados no `README.md` final:
 
 1. **Fragilidade do Encapsulamento Procedural:** Como a falta de proteção aos
-   atributos de `Process` permite mutações acidentais por qualquer parte do
+   atributos de `Process` e `Scheduler` permite mutações acidentais por qualquer parte do
    código, sem validação de invariantes.
 2. **Acoplamento por `switch` vs. Polymorphism (_Late Binding_):** A necessidade
    de editar funções centrais procedurais a cada novo algoritmo vs. a

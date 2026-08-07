@@ -39,7 +39,7 @@ exemplos/mecanica-dos-objetos/
 ### 2.1 Encapsulamento e Integridade dos Dados
 
 Como visto no **[Módulo 2: O que é um
-Objeto?](../../conceitos/2-o-que-e-um-objeto.md)**, o encapsulamento protege o
+Objeto?](../../../teoria/02-o-que-e-um-objeto.md)**, o encapsulamento protege o
 estado interno de um objeto contra modificações indevidas, garantindo
 invariantes de dados.
 
@@ -106,7 +106,7 @@ Um princípio fundamental no design orientado a objetos é **evitar a alteraçã
 código que já está consolidado e testado**, permitindo adicionar novas
 funcionalidades de forma puramente aditiva (indo ao encontro da decomposição de
 responsabilidades vista no **[Módulo 1: Paradigmas de
-Programação](../../conceitos/1-paradigmas-de-programacao.md)**).
+Programação](../../../teoria/01-paradigmas-de-programacao.md)**).
 
 - **Na versão Procedural (`procedural/`):** O despacho na função
   `scheduler_tick` em [scheduler.c](./procedural/scheduler.c) utiliza um bloco
@@ -116,8 +116,8 @@ Programação](../../conceitos/1-paradigmas-de-programacao.md)**).
   regressão.
 
 - **Na versão Orientada a Objetos (`oo/`):** Conforme estudado no **[Módulo 3:
-  Mecânica dos Objetos](../../conceitos/3-mecanica-dos-objetos.md)**, utilizamos
-  uma **Tabela de Métodos Virtuais (`vtable`)** definida em
+  Mecânica dos Objetos](../../../teoria/03-mecanica-dos-objetos.md)**,
+  utilizamos uma **Tabela de Métodos Virtuais (`vtable`)** definida em
   [scheduler.h](./oo/scheduler.h). O `Simulator` em
   [simulator.c](./oo/simulator.c) executa o escalonador chamando a interface
   abstrata via _late binding_.

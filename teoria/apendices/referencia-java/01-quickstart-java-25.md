@@ -94,7 +94,7 @@ Para projetos com múltiplos arquivos ou pacotes:
 ## 4. Pacotes e Organização (`package` e `import`)
 
 Conforme o que foi dito no [Módulo 1 sobre
-modularização](../../conceitos/1-paradigmas-de-programacao.md#modularização-módulos-pacotes-e-namespaces),
+modularização](../../01-paradigmas-de-programacao.md#modularização-módulos-pacotes-e-namespaces),
 o Java utiliza **pacotes** (_packages_) para agrupar classes relacionadas e
 evitar conflitos de nomes.
 

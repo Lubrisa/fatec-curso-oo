@@ -118,7 +118,7 @@ Estado Exposto  ──►  Qualquer Código Altera  ──►  Invariantes Quebr
 ```mermaid
 graph TD
     PUB["<b>public</b><br>Livre acesso externo global"]
-    PROT["<b>protected</b><br>Acessível na própria classe e em subclasses"]
+    PROT["<b>protected</b><br>Acessível na própria classe, no mesmo pacote e em subclasses"]
     PRIV["<b>private</b><br>Restrito exclusivamente à própria classe"]
 
     PUB --- PROT
@@ -131,8 +131,8 @@ graph TD
 - **`public`:** O membro é visível para qualquer outra parte da aplicação. Deve
   ser reservado para expor a interface de métodos públicos que representam as
   ações do domínio.
-- **`protected`:** Torna o membro visível para a própria classe e para **todas
-  as suas subclasses**.
+- **`protected`:** Torna o membro visível para a própria classe, para **qualquer
+  classe do mesmo pacote** e para **todas as suas subclasses**.
 
 > **Desambiguação Importante: `private` é por Classe, não por Instância**
 >

@@ -81,7 +81,7 @@ String dayName = switch (day) {
   Em versões mais antigas do Java, o `switch` aceitava apenas uma quantidade
   muito restrita de tipos de dados:
   - Tipos inteiros primitivos (`byte`, `short`, `char`, `int` e suas classes
-    _wrapper_ `Byte`, `Short`, `Char` e `Int`)
+    _wrapper_ `Byte`, `Short`, `Character` e `Integer`)
   - `String`
   - `Enum`
 

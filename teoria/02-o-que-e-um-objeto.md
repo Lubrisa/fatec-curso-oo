@@ -9,7 +9,8 @@ molde"_.
 
 Embora essa metáfora ajude a escrever a primeira linha de código em linguagens
 como Java ou C#, ela esconde a filosofia fundamental que deu origem ao
-paradigma. Historicamente, **os objetos vieram antes das classes**.
+paradigma. Segundo uma leitura comum da história, **os objetos vieram antes das
+classes**.
 
 Para compreender a essência do que é um objeto, precisamos nos libertar do vício
 de olhar apenas para as palavras-chave do compilador e entender a sua anatomia,

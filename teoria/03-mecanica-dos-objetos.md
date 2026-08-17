@@ -298,6 +298,15 @@ Para visualizar o _Late Binding_ em ação sem abstrações nebulosas, acompanhe
 jornada que a CPU e o runtime realizam na memória em **5 passos sequenciais**
 utilizando uma **VTable (Tabela de Despacho Dinâmico)**:
 
+> **Nota sobre o Modelo de VTable:** A estrutura `vptr` + VTable descrita a
+> seguir é o modelo clássico de implementação de despacho dinâmico utilizado em
+> C++ e runtimes similares. A JVM (Java HotSpot) utiliza internamente uma
+> arquitetura diferente — ponteiros de `Klass`, `itables` para interfaces e
+> _inline caches_ para otimização. O modelo apresentado aqui é um **recurso
+> didático** para tornar o conceito de _Late Binding_ concreto e visualizável;
+> ele captura a essência do mecanismo, mas não descreve a implementação literal
+> da JVM.
+
 #### Passo 1 — A Chamada é Emitida no Código
 
 O programa executa a instrução `notifier.send(msg)`. O chamador não sabe qual

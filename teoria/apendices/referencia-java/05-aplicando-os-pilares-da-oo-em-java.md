@@ -321,7 +321,7 @@ do mesmo contrato abstrato, respeitando o **Princípio Aberto/Fechado (OCP)**.
   tempo de **execução** (_Late Binding / Dynamic Binding_).
 
   ```java
-  @Override // Anotação obrigatória para garantir que o método está realmente sobrescrevendo a abstração
+  @Override // Anotação recomendada (não obrigatória pelo compilador, mas essencial na prática)
   public void processPayment(double amount) {
       // Regra específica da implementação
   }

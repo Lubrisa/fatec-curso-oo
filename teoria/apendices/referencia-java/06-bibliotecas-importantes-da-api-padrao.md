@@ -267,19 +267,25 @@ Customer customer2 = customerOpt.orElseThrow(() -> new NoSuchElementException("C
 
 ### 1. Leitura e Escrita Simplificadas no Terminal (Java 25)
 
-No Java 25, para scripts e programas com classes implícitas, a linguagem importa
-automaticamente os métodos estáticos da classe `java.io.IO`. Isso elimina a
+No Java 25, para scripts e programas com **classes implícitas** (sem declaração
+explícita de `class`), a linguagem importa automaticamente os métodos estáticos
+`println`, `print` e `readln` da classe `java.lang.IO`. Isso elimina a
 necessidade de instanciar `Scanner` ou escrever `System.out` para operações
 simples de terminal:
 
 ```java
-// Escrita direta (substitui o System.out.println)
+// Escrita direta (substitui o System.out.println) — válido em classes implícitas
 println("Imprime com quebra de linha ao final");
 print("Imprime sem quebra de linha");
 
 // Leitura direta (substitui o Scanner para leitura de linhas!)
 String name = readln("Digite seu nome: ");
 ```
+
+> **Atenção:** O auto-import só ocorre em **classes implícitas**. Em classes
+> declaradas explicitamente (com `public class MinhaClasse { ... }`), é preciso
+> qualificar as chamadas com o nome da classe: `IO.println(...)`,
+> `IO.readln(...)` — ou usar `import static java.lang.IO.*;`.
 
 ### 2. Método Tradicional no Terminal (`System.out` e `Scanner`)
 

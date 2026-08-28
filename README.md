@@ -40,9 +40,19 @@ trabalho, e chega nos pilares da orientação a objetos.
 | 16  | [16-mapas.md](01-java-basico/16-mapas.md)                                                   | `HashMap`, `LinkedHashMap` e `TreeMap`      |
 | 17  | [17-filas-e-pilhas.md](01-java-basico/17-filas-e-pilhas.md)                                 | Filas (`Queue`) e pilhas (`Stack`)          |
 
-### 02 · Orientação a Objetos _(em breve)_
+### 02 · Orientação a Objetos
 
-Classes, objetos, encapsulamento, herança e polimorfismo.
+| Cap | Arquivo                                                                 | Assunto                                              |
+| --- | ----------------------------------------------------------------------- | ---------------------------------------------------- |
+| 1   | [01-classes.md](02-oo/01-classes.md)                                     | Molde para dados e operações                         |
+| 2   | [02-objetos.md](02-oo/02-objetos.md)                                     | Instanciação, memória (heap/stack) e estado          |
+| 3   | [03-campos-e-metodos.md](02-oo/03-campos-e-metodos.md)                   | Membros de instância vs estáticos e a palavra `this` |
+| 4   | [04-construtores.md](02-oo/04-construtores.md)                           | Inicialização segura, validações e sobrecarga        |
+| 5   | [05-abstracao.md](02-oo/05-abstracao.md)                                 | Interfaces, contratos e o poder da abstração         |
+| 6   | [06-encapsulamento.md](02-oo/06-encapsulamento.md)                       | Proteção de invariantes e modificadores de acesso    |
+| 7   | [07-heranca.md](02-oo/07-heranca.md)                                     | Extensão, classes abstratas e a palavra `super`      |
+| 8   | [08-composicao.md](02-oo/08-composicao.md)                               | Composição sobre herança e flexibilidade de design   |
+| 9   | [09-polimorfismo.md](02-oo/09-polimorfismo.md)                           | Despacho dinâmico e extensibilidade                  |
 
 ---
 

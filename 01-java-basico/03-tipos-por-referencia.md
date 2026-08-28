@@ -88,8 +88,8 @@ BankAccount account2 = account1;  // account2 aponta para o MESMO objeto
 
 account2.deposit(500.0);
 
-system.out.println(account2.getBalance()); // 1500
-system.out.println(account1.getBalance()); // 1500
+System.out.println(account2.getBalance()); // 1500
+System.out.println(account1.getBalance()); // 1500
 ```
 
 No exemplo acima, as duas últimas linhas mostram que, mesmo modificado o objeto

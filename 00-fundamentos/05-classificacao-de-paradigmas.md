@@ -126,4 +126,4 @@ graph LR
 <a href="04-rumo-a-orientacao-a-objetos.md">← Cap. 4 — Rumo à Orientação a
 Objetos</a>
 
-<p align="right"><a href="../01-java-basico/README.md">Próximo: Módulo 1 — Java Básico →</a></p>
+<p align="right"><a href="../01-java-basico/01-instalacao-e-primeiro-programa.md">Próximo: Módulo 1 — Instalação e Primeiro Programa →</a></p>

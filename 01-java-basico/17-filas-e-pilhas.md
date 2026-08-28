@@ -138,3 +138,5 @@ para inserir ou remover no início.
 ---
 
 <a href="16-mapas.md">← Mapas</a>
+
+<p align="right"><a href="../02-oo/01-classes.md">Próximo: Módulo 2 — Classes →</a></p>

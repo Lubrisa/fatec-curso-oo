@@ -3,41 +3,43 @@
 ## O Que São Filas e Pilhas
 
 Filas e pilhas são coleções que definem uma **política de acesso** — ou seja,
-determinam em qual ordem os elementos saem, independentemente da ordem em que
+elas determinam em qual ordem os elementos saem, independentemente de quando
 entraram.
 
-**Fila (Queue)** segue a política FIFO (_First In, First Out_): o primeiro
-elemento a entrar é o primeiro a sair. Pense em uma fila de banco.
+### 1. Fila (`Queue` — FIFO: _First In, First Out_)
+
+O **primeiro** elemento a entrar é o **primeiro** a sair. Pense em uma fila de
+banco: quem chega primeiro é atendido primeiro.
 
 ![Fila — FIFO](./imgs/queue.png)
 
-Na imagem, o elemento que entrou primeiro está na base e é o próximo a sair. O
-elemento que entrou por último está no topo e ainda aguarda sua vez.
+### 2. Pilha (`Stack` — LIFO: _Last In, First Out_)
 
-**Pilha (Stack)** segue a política LIFO (_Last In, First Out_): o último
-elemento a entrar é o primeiro a sair. Pense em uma pilha de pratos — você
-sempre pega o de cima.
+O **último** elemento a entrar é o **primeiro** a sair. Pense em uma pilha de
+pratos: você sempre adiciona e retira pelo topo.
 
 ![Pilha — LIFO](./imgs/stack.png)
 
-Na imagem, o elemento que entrou por último está no topo e é o próximo a sair. O
-elemento que entrou primeiro está na base e só sairá quando todos os outros
-acima dele tiverem sido removidos.
+---
 
 ## Interfaces e Implementações
 
-Java representa filas com a interface `Queue<E>`. A interface `Deque<E>`
-(_Double Ended Queue_) estende `Queue` e permite inserir e remover em ambas as
-extremidades — o que a torna útil tanto como fila quanto como pilha.
+Java representa essas coleções através de duas interfaces principais:
 
-A implementação preferida para ambos os casos é `ArrayDeque`, que usa um array
-circular internamente e oferece custo amortizado O(1) para todas as operações.
+- **`Queue<E>`:** Contrato básico de fila (inserção no final, remoção no
+  início).
+- **`Deque<E>` (_Double Ended Queue_):** Fila de duas pontas. Permite inserir e
+  remover em **ambas as extremidades**, funcionando com máxima eficiência tanto
+  como **Fila** quanto como **Pilha**.
 
-> A classe `Stack` existe na biblioteca padrão mas é considerada legada. Prefira
-> `ArrayDeque` — ela é mais eficiente e não carrega as restrições de design da
-> `Stack` original.
+A implementação recomendada para ambos os casos é o **`ArrayDeque`**.
 
-## Fila com `ArrayDeque`
+> **Nota:** A classe `java.util.Stack` é considerada legada desde o Java 1.2 e
+> não deve ser utilizada em código moderno. Use sempre `ArrayDeque`.
+
+---
+
+## Fila com `ArrayDeque` (FIFO)
 
 ```java
 import java.util.ArrayDeque;
@@ -45,22 +47,28 @@ import java.util.Queue;
 
 Queue<String> queue = new ArrayDeque<>();
 
-queue.offer("primeiro");   // insere no final
+// 1. Enfileirar (insere no final)
+queue.offer("primeiro");
 queue.offer("segundo");
 queue.offer("terceiro");
 
-queue.peek();              // "primeiro" — consulta o início sem remover
-queue.poll();              // "primeiro" — remove e retorna o início
+// 2. Consultar o início sem remover
+queue.peek();              // "primeiro"
+
+// 3. Desenfileirar (remove e retorna o início)
+queue.poll();              // "primeiro"
 queue.poll();              // "segundo"
 
-queue.size();              // 1
+queue.size();              // 1 elemento restante
 queue.isEmpty();           // false
 ```
 
-`offer` e `poll` retornam `null` quando a fila está vazia, em vez de lançar
-exceção — preferível na maioria dos casos.
+`offer` e `poll` são os métodos preferidos porque retornam `null` caso a fila
+esteja vazia, evitando exceções no fluxo normal.
 
-## Pilha com `ArrayDeque`
+---
+
+## Pilha com `ArrayDeque` (LIFO)
 
 ```java
 import java.util.ArrayDeque;
@@ -68,72 +76,60 @@ import java.util.Deque;
 
 Deque<String> stack = new ArrayDeque<>();
 
-stack.push("primeiro");    // insere no topo
+// 1. Empilhar (insere no topo)
+stack.push("primeiro");
 stack.push("segundo");
 stack.push("terceiro");
 
-stack.peek();              // "terceiro" — consulta o topo sem remover
-stack.pop();               // "terceiro" — remove e retorna o topo
+// 2. Consultar o topo sem remover
+stack.peek();              // "terceiro"
+
+// 3. Desempilhar (remove e retorna o topo)
+stack.pop();               // "terceiro"
 stack.pop();               // "segundo"
 
-stack.size();              // 1
+stack.size();              // 1 elemento restante
 stack.isEmpty();           // false
 ```
 
-`push` e `pop` lançam exceção se a pilha estiver vazia. Para comportamento sem
-exceção, use `offerFirst` / `pollFirst`.
+> **Dica:** `pop()` lança `NoSuchElementException` se a pilha estiver vazia. Se
+> preferir um método que retorne `null` em vez de lançar exceção, utilize
+> `pollFirst()`.
 
-## Como o `ArrayDeque` Funciona
+---
 
-Internamente, o `ArrayDeque` mantém um array e dois índices: `head`, que aponta
-para o primeiro elemento válido, e `tail`, que aponta para o último elemento
-inserido.
+## Por Que o `ArrayDeque` é Tão Rápido?
 
-![Estrutura interna do ArrayDeque](./imgs/arraydequeue.png)
+O `ArrayDeque` consegue executar inserções e remoções em ambas as pontas em
+tempo constante (**$O(1)$**), sem nunca precisar deslocar elementos na memória
+como o `ArrayList` faz.
 
-Na imagem, `tail` aponta para o índice 3 (valor 9) e `head` aponta para o índice
-7 (valor 23). Os elementos válidos são 23, 1, 7, 12 e 9 — percorridos a partir
-de `head` em direção ao início do array e continuando do índice 0 até `tail`.
-Repare que os índices 4 (16) e 5 (4) têm valores antigos de operações
-anteriores: o `ArrayDeque` não precisa limpar os slots ao remover um elemento,
-basta avançar o índice. O índice 6 é `null` — uma posição que nunca foi escrita.
+Ele alcança isso utilizando um **Buffer Circular (Array em Anel)** com dois
+índices que giram modularmente: `head` (cabeça) e `tail` (cauda).
 
-Cada operação move um dos índices:
+- **Como Fila:** os elementos entram por `tail` e saem por `head`.
+- **Como Pilha:** os elementos entram e saem pela mesma ponta (`head`).
 
-- **Inserir no final** (`offer`): coloca o elemento no slot após `tail` e avança
-  `tail`
-- **Remover do início** (`poll`): retorna o elemento em `head` e avança `head`
-- **Inserir no início** (`push`/`offerFirst`): recua `head` e coloca o elemento
-  lá
+---
 
-Os índices não param na borda do array — quando chegam no último índice, voltam
-para 0 usando aritmética modular. É por isso que a estrutura é chamada de
-_buffer circular_.
+> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**  
+> Quer ver o diagrama do anel de memória, entender a matemática dos ponteiros e
+> o redimensionamento do buffer?
+>
+> - 📄 [Apêndice: Anatomia do ArrayDeque (Buffer
+>   Circular)](estruturas/arraydeque.md)
 
-![ArrayDeque como anel](./imgs/arraydequeue-ring.png)
+---
 
-Na visualização em anel fica mais claro o que aconteceu: `head` (23) está depois
-de `tail` (9) no sentido horário, o que significa que `head` já deu a volta pelo
-array. A zona livre (tracejada) vai de `tail` até `head` no sentido horário —
-índices 4 (16, stale), 5 (4, stale) e 6 (null). Se continuarmos inserindo
-elementos pelo lado do `head` (recuando-o) ou avançando `tail`, os dois índices
-vão se aproximar. Quando se encontrarem após uma inserção — sem mais slots
-disponíveis — o `ArrayDeque` dobra o tamanho do array e reposiciona todos os
-elementos, exatamente como o `ArrayList`.
+## Guia Prático: Quando Usar Cada Estrutura
 
-Esse mecanismo permite O(1) para inserções e remoções em ambas as extremidades
-sem deslocar nenhum elemento — ao contrário de um `ArrayList`, que custaria O(n)
-para inserir ou remover no início.
-
-## Quando Usar
-
-| Situação                                    | Estrutura |
-| ------------------------------------------- | --------- |
-| Processar tarefas na ordem em que chegaram  | Fila      |
-| Desfazer operações (undo)                   | Pilha     |
-| Navegar em histórico (voltar / avançar)     | Deque     |
-| Busca em largura (BFS) em grafos ou árvores | Fila      |
-| Busca em profundidade (DFS) iterativa       | Pilha     |
+| Cenário de Negócio                                           | Estrutura Recomendada        |
+| :----------------------------------------------------------- | :--------------------------- |
+| Processar mensagens, pedidos ou tarefas por ordem de chegada | **Fila (`Queue`)**           |
+| Mecanismos de Desfazer / Refazer (_Undo / Redo_)             | **Pilha (`Deque.push/pop`)** |
+| Histórico de navegação (voltar e avançar)                    | **`Deque` (duas pontas)**    |
+| Algoritmos de busca em largura (BFS) em grafos/árvores       | **Fila (`Queue`)**           |
+| Algoritmos de busca em profundidade (DFS) iterativos         | **Pilha (`Deque`)**          |
 
 ---
 

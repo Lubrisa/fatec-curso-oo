@@ -69,59 +69,6 @@ for (int i = 0; i < cities.size(); i++) {
 }
 ```
 
----
-
-## `ArrayList` vs `LinkedList`
-
-Java oferece duas implementações principais para a interface `List`, com
-estratégias de armazenamento e perfis de performance bem diferentes:
-
-1. **`ArrayList` (Baseado em Array Dinâmico):**
-   - Os elementos ficam em **posições contíguas de memória** (como uma fileira
-     de cadeiras no cinema).
-   - **Superpoder:** Acesso instantâneo a qualquer posição por índice (`get(i)`
-     em $O(1)$).
-   - **Ponto fraco:** Inserir no início (`add(0, v)`) exige empurrar todos os
-     outros elementos para a direita ($O(n)$).
-
-2. **`LinkedList` (Baseado em Nós Encadeados):**
-   - Cada elemento é um **nó independente** no Heap que aponta para o anterior e
-     para o próximo (como uma caça ao tesouro).
-   - **Superpoder:** Inserir ou remover nas pontas (`addFirst`, `removeFirst`) é
-     instantâneo ($O(1)$), pois basta atualizar as setinhas do nó vizinho.
-   - **Ponto fraco:** Para buscar `get(i)`, o Java precisa percorrer a corrente
-     nó por nó até a posição desejada ($O(n)$).
-
-### Tabela Comparativa de Complexidade
-
-| Operação               | `ArrayList` | `LinkedList`                 |
-| ---------------------- | ----------- | ---------------------------- |
-| `get(i)` / `set(i, v)` | **O(1)**    | O(n)                         |
-| `add(v)` — final       | **O(1)\***  | **O(1)**                     |
-| `add(0, v)` — início   | O(n)        | **O(1)**                     |
-| `remove` — final       | **O(1)**    | **O(1)**                     |
-| `remove` — início      | O(n)        | **O(1)**                     |
-| Memória por elemento   | Compacta    | Overhead de 2 ponteiros + nó |
-
-\* _Custo constante amortizado._
-
-> **Regra prática:**  
-> **Comece sempre com `ArrayList`**. Seu acesso instantâneo por índice e menor
-> uso de memória fazem dele a escolha certa em 99% dos sistemas reais. Considere
-> `LinkedList` apenas se o perfil de uso da sua aplicação for dominado por
-> inserções e remoções contínuas no início da fila.
-
----
-
-> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**  
-> Quer ver os diagramas de alocação de memória no Heap, o redimensionamento e o
-> encadeamento de nós em detalhes?
->
-> - 📄 [Apêndice: Anatomia do ArrayList](estruturas/arraylist.md)
-> - 📄 [Apêndice: Anatomia do LinkedList](estruturas/linkedlist.md)
-
----
-
 ## Convertendo entre Array e Lista
 
 ```java
@@ -132,6 +79,63 @@ List<String> list = Arrays.asList(array);
 // Lista → Array
 String[] back = list.toArray(new String[0]);
 ```
+
+## `ArrayList` vs `LinkedList`
+
+Java oferece duas implementações principais para a interface `List`, com
+estratégias de armazenamento e perfis de performance bem diferentes:
+
+1. **`ArrayList` (Baseado em Array Dinâmico):**
+   - Os elementos ficam em **posições contíguas de memória** (como uma fileira
+     de cadeiras no cinema).
+   - **Ponto forte:** Acesso instantâneo a qualquer posição por índice (`get(i)`
+     em $O(1)$).
+   - **Ponto fraco:** Inserir no início (`add(0, v)`) exige empurrar todos os
+     outros elementos para a direita ($O(n)$).
+
+2. **`LinkedList` (Baseado em Nós Encadeados):**
+   - Cada elemento é um **nó independente** no Heap que aponta para o anterior e
+     para o próximo (como as locomotivas de um trem).
+   - **Ponto forte:** Inserir ou remover nas pontas (`addFirst`, `removeFirst`)
+     é instantâneo ($O(1)$), pois basta atualizar os ponteiros do nó vizinho.
+   - **Ponto fraco:** Para buscar `get(i)`, o Java precisa percorrer a corrente
+     nó por nó até a posição desejada ($O(n)$).
+
+---
+
+> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**
+>
+> Quer ver como os elementos estão dispostos em memória, o que acontece quando
+> precisamos adicionar novos elementos, e mais detalhes de como as listas
+> funcionam internamente? Confira os apêndices abaixo:
+>
+> - 📄 [Apêndice: Anatomia do ArrayList](estruturas/arraylist.md)
+> - 📄 [Apêndice: Anatomia do LinkedList](estruturas/linkedlist.md)
+
+### Tabela Comparativa de Complexidade
+
+| Operação               | `ArrayList` | `LinkedList`                 |
+| ---------------------- | ----------- | ---------------------------- |
+| `get(i)` / `set(i, v)` | **O(1)**    | O(n)                         |
+| `add(v)` — final       | **O(1)\***  | **O(1)**                     |
+| `add(0, v)` — início   | O(n)        | **O(1)**                     |
+| `add(i, v)` — meio     | O(n)        | O(n)                         |
+| `remove` — final       | **O(1)**    | **O(1)**                     |
+| `remove` — início      | O(n)        | **O(1)**                     |
+| Memória por elemento   | Compacta    | Overhead de 2 ponteiros + nó |
+
+Onde:
+
+- $n$ é o número de elementos na lista.
+
+\* _Custo constante amortizado._
+
+> **Regra prática:**
+>
+> **Comece sempre com `ArrayList`**. Seu acesso instantâneo por índice e menor
+> uso de memória fazem dele a escolha certa em 99% dos sistemas reais. Considere
+> `LinkedList` apenas se o perfil de uso da sua aplicação for dominado por
+> inserções e remoções contínuas no início da fila.
 
 ---
 

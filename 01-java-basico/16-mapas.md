@@ -94,8 +94,6 @@ for (int score : scores.values()) {
 }
 ```
 
----
-
 ## `HashMap`, `LinkedHashMap` e `TreeMap`
 
 As três implementações de `Map` utilizam **exatamente as mesmas estruturas
@@ -104,7 +102,8 @@ diferença é que cada nó armazena uma **chave e um valor associado**, em vez d
 apenas um elemento:
 
 1. **`HashMap` (Tabela Hash):**
-   - Calcula o `hashCode()` a partir da **chave**.
+   - Calcula o `hashCode()` e realiza as comparações com `equals()` a partir da
+     **chave**.
    - **Performance:** Inserção, busca e remoção em **$O(1)$ constante**. A ordem
      de iteração é imprevisível.
 
@@ -116,23 +115,8 @@ apenas um elemento:
    - Mantém as chaves **sempre ordenadas** (alfabética ou crescente).
    - **Performance:** Busca e inserção em **$O(\log n)$**.
 
-### Tabela Comparativa
-
-| Operação                          | `HashMap`      | `LinkedHashMap`      | `TreeMap`                |
-| :-------------------------------- | :------------- | :------------------- | :----------------------- |
-| **`put` / `get` / `containsKey`** | **O(1) médio** | **O(1) médio**       | **O(log n)**             |
-| **Ordem de iteração**             | Imprevisível   | Ordem de inserção    | Ordem natural das chaves |
-| **Memória por entrada**           | Compacta       | + ponteiros de ordem | + ponteiros de árvore    |
-
-> **Regra prática:**  
-> **Comece sempre com `HashMap`**. Use `LinkedHashMap` quando a ordem em que as
-> chaves foram cadastradas importar (como um cache LRU ou formulários) e
-> `TreeMap` quando precisar iterar sobre as chaves em ordem alfabética ou
-> numérica.
-
----
-
-> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**  
+> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**
+>
 > Como os mapas compartilham as engrenagens internas dos conjuntos, veja como a
 > memória funciona nos apêndices:
 >
@@ -141,6 +125,21 @@ apenas um elemento:
 >   (TreeMap)](estruturas/treeset.md)
 > - 📄 [Apêndice: Anatomia da Ordem de Inserção
 >   (LinkedHashMap)](estruturas/linkedhashset.md)
+
+### Tabela Comparativa
+
+| Operação                          | `HashMap`      | `LinkedHashMap`      | `TreeMap`                |
+| :-------------------------------- | :------------- | :------------------- | :----------------------- |
+| **`put` / `get` / `containsKey`** | **O(1) médio** | **O(1) médio**       | **O(log n)**             |
+| **Ordem de iteração**             | Imprevisível   | Ordem de inserção    | Ordem natural das chaves |
+| **Memória por entrada**           | Compacta       | + ponteiros de ordem | + ponteiros de árvore    |
+
+> **Regra prática:**
+>
+> **Comece sempre com `HashMap`**. Use `LinkedHashMap` quando a ordem em que as
+> chaves foram cadastradas importar (como um cache LRU ou formulários) e
+> `TreeMap` quando precisar iterar sobre as chaves em ordem alfabética ou
+> numérica.
 
 ---
 

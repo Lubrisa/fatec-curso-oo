@@ -90,8 +90,6 @@ a.removeAll(b);      // a vira {x}
 > **Nota:** Essas operações modificam o conjunto que as chamou. Se precisar
 > preservar o conjunto original, crie uma cópia antes: `new HashSet<>(a)`.
 
----
-
 ## `HashSet`, `LinkedHashSet` e `TreeSet`
 
 As três implementações resolvem o mesmo problema de unicidade, mas atendem a
@@ -116,29 +114,41 @@ necessidades diferentes de ordenação e memória:
    - **Performance:** Busca e inserção em **$O(\log n)$**. Não aceita elementos
      que não sejam comparáveis entre si.
 
-### Tabela Comparativa
-
-| Característica         | `HashSet`    | `LinkedHashSet`              | `TreeSet`                     |
-| :--------------------- | :----------- | :--------------------------- | :---------------------------- |
-| **Complexidade média** | **O(1)**     | **O(1)**                     | **O(log n)**                  |
-| **Ordem de iteração**  | Imprevisível | Ordem de inserção            | Ordem natural / Comparator    |
-| **Consumo de memória** | Baixo        | Médio (+ ponteiros de ordem) | Médio (+ ponteiros de árvore) |
-
-> **Regra prática:**  
-> **Comece sempre com `HashSet`**. Use `LinkedHashSet` quando a ordem de chegada
-> importar (como histórico de navegação ou filtros) e `TreeSet` apenas quando
-> você precisar dos elementos constantemente classificados em ordem alfabética
-> ou numérica.
-
 ---
 
-> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**  
+> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**
+>
 > Quer entender como o `hashCode` encontra os buckets, como as árvores se
 > auto-balanceiam e como funcionam as colisões?
 >
 > - 📄 [Apêndice: Anatomia do HashSet](estruturas/hashset.md)
 > - 📄 [Apêndice: Anatomia do TreeSet](estruturas/treeset.md)
 > - 📄 [Apêndice: Anatomia do LinkedHashSet](estruturas/linkedhashset.md)
+
+### Tabela Comparativa de Complexidade
+
+| Operação / Característica     | `HashSet`    | `LinkedHashSet`              | `TreeSet`                           |
+| :---------------------------- | :----------- | :--------------------------- | :---------------------------------- |
+| `add` / `contains` / `remove` | **O(1)\***   | **O(1)\***                   | O(log n)                            |
+| `addAll` (união)              | **O(m)\***   | **O(m)\***                   | O(m log n)                          |
+| `retainAll` (interseção)      | **O(n)\***   | **O(n)\***                   | O(n log n)                          |
+| `removeAll` (diferença)       | **O(m)\***   | **O(m)\***                   | O(m log n)                          |
+| **Ordem de iteração**         | Imprevisível | Ordem de inserção            | Ordem natural / Comparator          |
+| **Memória por elemento**      | Baixa        | Média (+ ponteiros de ordem) | Média (+ nós e ponteiros da árvore) |
+
+Onde:
+
+- $n$ é a quantidade de elementos do conjunto atual;
+- $m$ é a quantidade de elementos do outro conjunto.
+
+\* _Custo médio._
+
+> **Regra prática:**
+>
+> **Comece sempre com `HashSet`**. Use `LinkedHashSet` quando a ordem de chegada
+> importar (como histórico de navegação ou filtros) e `TreeSet` apenas quando
+> você precisar dos elementos constantemente classificados em ordem alfabética
+> ou numérica.
 
 ---
 

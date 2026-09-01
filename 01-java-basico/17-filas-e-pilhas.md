@@ -20,8 +20,6 @@ pratos: você sempre adiciona e retira pelo topo.
 
 ![Pilha — LIFO](./imgs/stack.png)
 
----
-
 ## Interfaces e Implementações
 
 Java representa essas coleções através de duas interfaces principais:
@@ -36,8 +34,6 @@ A implementação recomendada para ambos os casos é o **`ArrayDeque`**.
 
 > **Nota:** A classe `java.util.Stack` é considerada legada desde o Java 1.2 e
 > não deve ser utilizada em código moderno. Use sempre `ArrayDeque`.
-
----
 
 ## Fila com `ArrayDeque` (FIFO)
 
@@ -65,8 +61,6 @@ queue.isEmpty();           // false
 
 `offer` e `poll` são os métodos preferidos porque retornam `null` caso a fila
 esteja vazia, evitando exceções no fluxo normal.
-
----
 
 ## Pilha com `ArrayDeque` (LIFO)
 
@@ -96,8 +90,6 @@ stack.isEmpty();           // false
 > preferir um método que retorne `null` em vez de lançar exceção, utilize
 > `pollFirst()`.
 
----
-
 ## Por Que o `ArrayDeque` é Tão Rápido?
 
 O `ArrayDeque` consegue executar inserções e remoções em ambas as pontas em
@@ -112,14 +104,13 @@ Ele alcança isso utilizando um **Buffer Circular (Array em Anel)** com dois
 
 ---
 
-> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**  
+> 🔍 **Aprofundamento — Abrindo a Caixa Preta:**
+>
 > Quer ver o diagrama do anel de memória, entender a matemática dos ponteiros e
 > o redimensionamento do buffer?
 >
 > - 📄 [Apêndice: Anatomia do ArrayDeque (Buffer
 >   Circular)](estruturas/arraydeque.md)
-
----
 
 ## Guia Prático: Quando Usar Cada Estrutura
 

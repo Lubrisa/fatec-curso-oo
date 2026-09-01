@@ -9,10 +9,11 @@ tamanho na criação.
 A interface `List<E>` define o contrato; `ArrayList` é a implementação mais
 utilizada no dia a dia.
 
-> O `<E>` indica que `List` é um tipo genérico — assunto que exploraremos mais
-> adiante. Por ora, basta saber que você substitui `E` pelo tipo dos elementos
-> (`String`, `Integer`, `BankAccount`, etc.) e o compilador passa a garantir que
-> todas as operações respeitam esse tipo.
+> O `<E>` indica que `List` é um tipo genérico — explorado em profundidade no
+> [Guia de Generics](../../java-moderno/02-generics/01-fundamentos.md). Por ora,
+> basta saber que você substitui `E` pelo tipo dos elementos (`String`,
+> `Integer`, `BankAccount`, etc.) e o compilador passa a garantir que todas as
+> operações respeitam esse tipo.
 
 ## Criando Listas
 

@@ -30,6 +30,9 @@ Java representa essas coleções através de duas interfaces principais:
   remover em **ambas as extremidades**, funcionando com máxima eficiência tanto
   como **Fila** quanto como **Pilha**.
 
+> A notação `<E>` indica o uso de tipos genéricos (detalhado no [Guia de
+> Generics](../../java-moderno/02-generics/01-fundamentos.md)).
+
 A implementação recomendada para ambos os casos é o **`ArrayDeque`**.
 
 > **Nota:** A classe `java.util.Stack` é considerada legada desde o Java 1.2 e

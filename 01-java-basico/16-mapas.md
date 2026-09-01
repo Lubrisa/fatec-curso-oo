@@ -10,9 +10,10 @@ A interface `Map<K, V>` define o contrato, com dois parâmetros de tipo: `K` par
 o tipo da chave e `V` para o tipo do valor. As três implementações mais comuns
 são `HashMap`, `LinkedHashMap` e `TreeMap`.
 
-> O `Map<K, V>` é um tipo genérico com dois parâmetros. Você substitui `K` e `V`
-> pelos tipos concretos (por exemplo: `Map<String, BankAccount>`) e o compilador
-> garante a consistência de ambos.
+> O `Map<K, V>` é um tipo genérico com dois parâmetros (detalhado no [Guia de
+> Generics](../../java-moderno/02-generics/01-fundamentos.md)). Você substitui
+> `K` e `V` pelos tipos concretos (por exemplo: `Map<String, BankAccount>`) e o
+> compilador garante a consistência de ambos.
 
 ## Criando Mapas
 

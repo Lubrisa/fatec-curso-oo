@@ -8,8 +8,6 @@ Como ele alcança esse equilíbrio? Ele funde duas estruturas em um único nó: 
 **Tabela Hash (Hash Table)** e uma **Lista Duplamente Encadeada (Doubly-Linked
 List)**.
 
----
-
 ## 1. A Estrutura Híbrida
 
 Cada nó do `LinkedHashSet` tem **dupla personalidade**:
@@ -24,10 +22,8 @@ Cada nó do `LinkedHashSet` tem **dupla personalidade**:
 Na imagem acima, vemos as duas conexões convivendo:
 
 - O valor `1` e o valor `9` caíram no mesmo bucket do hash table.
-- Ao mesmo tempo, existem ponteiros vermelhos ligando `1 ↔ 7 ↔ 12 ↔ 9` na ordem
+- Ao mesmo tempo, existem ponteiros ligando `1 ↔ 7 ↔ 12 ↔ 9` na ordem
   cronológica em que o usuário os adicionou ao conjunto.
-
----
 
 ## 2. As Duas Perspectivas da Mesma Estrutura
 
@@ -48,15 +44,13 @@ inserção](../imgs/linkedhashset-reorganizado.png)
    - A iteração sai **exatamente na ordem em que os itens foram inseridos**, sem
      precisar varrer todo o array de buckets.
 
----
-
 ## 3. O Trade-off (Custo de Memória)
 
 O `LinkedHashSet` oferece o melhor dos dois mundos (ordem previsível + busca
 instantânea), mas tem um preço:
 
-- **Mais memória por elemento:** Cada nó carrega dois ponteiros adicionais
-  (`before` e `after`), consumindo mais espaço que o `HashSet`.
+- **Mais memória por elemento:** Cada nó carrega dois ponteiros adicionais,
+  consumindo mais espaço que o `HashSet`.
 - **Pequeno custo extra de inserção/remoção:** Toda vez que um item entra ou
   sai, o Java precisa atualizar tanto a lista do bucket quanto os ponteiros da
   cadeia global.

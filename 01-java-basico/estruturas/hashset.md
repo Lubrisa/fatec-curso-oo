@@ -8,8 +8,6 @@ buscas (`contains`).
 Como isso é possível sem percorrer todos os elementos da coleção? A resposta é a
 **Tabela Hash (Hash Table)**.
 
----
-
 ## 1. A Estrutura Interna de Gavetas (Buckets)
 
 Internamente, o `HashSet` mantém um array de posições chamadas de **_buckets_**
@@ -27,19 +25,15 @@ Na imagem acima:
   pequena lista encadeada onde `1` aponta para `9`.
 - Os valores `12` e `7` caíram em buckets isolados.
 
----
-
 ## 2. O Algoritmo de 3 Passos da Inserção e Busca
 
 Quando você chama `set.add("java")` ou `set.contains("java")`, o Java executa um
 processo em 3 etapas instantâneas:
 
-```
-Passo 1: Calcula o Hash             Passo 2: Mapeia para o Bucket          Passo 3: Compara com equals()
-┌───────────────────────┐           ┌────────────────────────────┐         ┌───────────────────────────────┐
-│ "java".hashCode()     │ ────────> │ hash % tamanhoDoArray      │ ──────> │ Percorre a listinha do bucket │
-│ Retorna ex: 3254818   │           │ Retorna o índice: ex: 2    │         │ usando equals() nos elementos │
-└───────────────────────┘           └────────────────────────────┘         └───────────────────────────────┘
+```mermaid
+flowchart LR
+    P1["<b>Passo 1: Calcula o Hash</b><br/><code>&quot;java&quot;.hashCode()</code><br/>Retorna ex: 3254818"] --> P2["<b>Passo 2: Mapeia para o Bucket</b><br/><code>hash % tamanhoDoArray</code><br/>Retorna o índice ex: 2"]
+    P2 --> P3["<b>Passo 3: Compara com equals()</b><br/>Percorre a lista do bucket<br/>usando <code>equals()</code> nos elementos"]
 ```
 
 1. **Calcula o `hashCode()`:** Todo objeto Java possui o método `hashCode()`,
@@ -56,8 +50,6 @@ Passo 1: Calcula o Hash             Passo 2: Mapeia para o Bucket          Passo
        duplicata).
      - Se não encontrar $\rightarrow$ adiciona o novo nó no final da listinha
        daquele bucket.
-
----
 
 ## 3. O Que É uma Colisão e o Contrato `hashCode` / `equals`
 
@@ -77,8 +69,6 @@ métodos trabalhando em harmonia**:
 > OBRIGATORIAMENTE retornar o mesmo `hashCode()`**. Se você quebrar essa regra,
 > o `HashSet` vai procurar o objeto no bucket errado e não vai encontrá-lo,
 > gerando duplicatas ou falhas silenciosas nas buscas!
-
----
 
 ## 4. O Que Acontece Quando a Tabela Enche? (Rehashing)
 

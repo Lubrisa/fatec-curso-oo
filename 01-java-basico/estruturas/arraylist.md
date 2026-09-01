@@ -11,12 +11,14 @@ se redimensiona automaticamente**.
 
 Quando você cria um `ArrayList`, a JVM aloca dois componentes no Heap:
 
-1. **O objeto `ArrayList`:** guarda o campo `size` (quantos elementos foram
-   realmente inseridos) e uma referência `items` para o array interno.
-2. **O array interno:** uma sequência contígua de posições de memória.
+1. **O objeto `ArrayList`:** guarda informações de controle (como a quantidade
+   de elementos que foram realmente inseridos) e uma referência para o array
+   interno onde os dados residem.
+2. **O array interno:** uma sequência contígua de posições de memória que
+   armazena os elementos da lista.
 
-A **capacidade** é o tamanho total desse array interno, enquanto o **tamanho
-(`size`)** é quantos slots estão atualmente ocupados por dados do usuário:
+A **capacidade** é o tamanho total desse array interno, enquanto o **tamanho** é
+quantos slots estão atualmente ocupados por dados do usuário:
 
 ![Estrutura interna do ArrayList](../imgs/arraylist.png)
 
@@ -27,8 +29,6 @@ Na imagem acima:
 - As 4 primeiras posições guardam as referências dos dados válidos.
 - As **12 posições restantes contêm `null`**, funcionando como uma margem de
   reserva para que as próximas inserções sejam imediatas.
-
----
 
 ## 2. A Mecânica das Operações
 
@@ -41,20 +41,16 @@ fórmula matemática simples: $$\text{Endereço} = \text{Endereço Inicial} + (i
 para a posição `i` é direto e leva o mesmo tempo, seja o índice 0 ou o índice
 10.000.
 
----
-
 ### Inserção no Final: `add(v)` $\rightarrow O(1)$ amortizado
 
 Adicionar um elemento ao final da lista é muito rápido:
 
-1. O Java coloca o novo valor na posição indicada por `size` (`items[size] =
-v`).
-2. Incrementa o contador: `size++`.
+1. O Java coloca o novo valor na próxima posição livre do array interno (com
+   base no controle atual de tamanho).
+2. Incrementa a contagem interna de elementos.
 
 Enquanto houver posições `null` sobrando na capacidade de reserva, a inserção é
 praticamente instantânea.
-
----
 
 ### Inserção no Início ou Meio: `add(0, v)` $\rightarrow O(n)$
 
@@ -68,12 +64,10 @@ Inserir no início (ou no meio) tem um custo físico real:
   a lista tiver 100.000 elementos, todos os 100.000 precisam ser copiados de
   lugar.
 
----
-
 ## 3. O Redimensionamento (Resizing)
 
 O que acontece quando você faz `add` e todas as posições do array interno já
-estão preenchidas (`size == capacidade`)?
+estão preenchidas (a quantidade de elementos atinge a capacidade total)?
 
 Um array no Java tem tamanho fixo e **não pode ser expandido no mesmo lugar da
 memória**. Por isso, o `ArrayList` executa um processo em 4 etapas:
@@ -85,11 +79,11 @@ memória**. Por isso, o `ArrayList` executa um processo em 4 etapas:
    32 posições).
 2. **Cópia em massa:** Copia todos os elementos do array antigo para o novo
    array.
-3. **Novo Elemento:** Insere o novo elemento no próximo slot livre (`size =
-17`).
-4. **Atualização e Descarte:** Aponta a referência `items` para o novo array. O
-   array antigo perde sua referência e fica aguardando a limpeza do _Garbage
-   Collector_.
+3. **Novo Elemento:** Insere o novo elemento no próximo slot livre (no exemplo,
+   passando a ter 17 elementos).
+4. **Atualização e Descarte:** Aponta a referência interna do `ArrayList` para o
+   novo array. O array antigo perde sua referência e fica aguardando a limpeza
+   do _Garbage Collector_.
 
 ### Por que dizemos que `add` é $O(1)$ Amortizado?
 
@@ -100,8 +94,6 @@ acontece com **frequência cada vez menor**.
 Ao diluir o custo dessa cópia rara ao longo de milhares de inserções normais que
 foram instantâneas, o custo médio por inserção continua sendo considerado
 **constante ($O(1)$ amortizado)**.
-
----
 
 ## 4. Dica de Ouro para Performance
 

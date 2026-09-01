@@ -55,6 +55,12 @@ interface Account {
 }
 ```
 
+> **Convenção de Nomenclatura**
+>
+> Nomes de interfaces usam **PascalCase** (`Account`, `FeePolicy`, `List`).
+> Costumam ser substantivos que descrevem um papel ou adjetivos que indicam uma
+> capacidade (`Comparable`, `Iterable`, `AutoCloseable`).
+
 Uma `interface` não tem campos de instância e em versões mais antigas do Java
 não podia declarar uma implementação para seus métodos. Ela é pura declaração de
 intenção: quem implementar `Account` se compromete a fornecer `deposit`,

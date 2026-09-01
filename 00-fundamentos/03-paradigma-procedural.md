@@ -22,6 +22,18 @@ que se repete, dê um nome a ele, e chame pelo nome sempre que precisar_.
 Esse bloco nomeado e reutilizável é chamado de **sub-rotina** — o conceito
 central do paradigma procedural.
 
+> **Sub-rotina, Procedimento e Função**
+>
+> - **Sub-rotina:** termo histórico genérico para qualquer bloco de código
+>   nomeado e reutilizável.
+> - **Procedimento (_procedure_):** sub-rotina que executa ações mas não produz
+>   valor de retorno (`void`). O nome do paradigma vem daqui.
+> - **Função:** sub-rotina que calcula e retorna um valor (como `boolean withdraw(...)`).
+>
+> No dia a dia moderno, a maioria das linguagens usa "função" para ambos os
+> casos — e em Java, blocos de código que pertencem a uma classe são chamados de
+> **métodos**.
+
 Aplicando ao sistema bancário:
 
 ```java
@@ -117,123 +129,6 @@ graph LR
 
     classDef current stroke-width:2px
 ```
-
----
-
-### Nota Técnica — Função, Procedimento e Sub-rotina
-
-_Leitura opcional — aprofunda o vocabulário técnico desta seção._
-
-Os três termos são frequentemente usados de forma intercambiável no dia a dia,
-mas têm origens e significados ligeiramente diferentes:
-
-- **Sub-rotina** é o termo histórico genérico para qualquer bloco de código
-  nomeado que pode ser chamado de outro ponto do programa e retorna o controle
-  ao chamador quando termina.
-- **Procedimento** (_procedure_) é uma sub-rotina que executa ações mas não
-  produz um valor de retorno — o equivalente ao `void` de Java. O nome do
-  paradigma vem daqui.
-- **Função** é uma sub-rotina que calcula e retorna um valor, análoga ao
-  conceito matemático _y = f(x)_. `withdraw` retorna `boolean`, portanto é
-  tecnicamente uma função; `deposit` retorna `void`, portanto é tecnicamente um
-  procedimento.
-
-Na prática, Java chama tudo de _método_ — e a maioria das linguagens modernas
-usa "função" para os dois casos, independentemente de haver retorno. A distinção
-rigorosa existe, mas raramente importa fora de contextos formais.
-
----
-
-### Nota Técnica — Arquivo, Módulo, Pacote, Namespace e Biblioteca
-
-_Leitura opcional — organiza termos que costumam aparecer juntos sem distinção
-clara._
-
-#### Definições
-
-- **Arquivo** (`.java`, `.py`, `.c`) é a unidade física de armazenamento no
-  disco. É onde o código vive, mas não é necessariamente uma unidade lógica do
-  programa — um módulo pode estar espalhado por vários arquivos, e um arquivo
-  pode conter múltiplos módulos.
-
-- **Módulo** é a unidade lógica de agrupamento com uma fronteira explícita entre
-  o que é público (acessível por outros) e o que é privado (detalhe interno de
-  implementação). A linguagem Modula-2 (1978) popularizou o conceito formal; em
-  Java, cada `class` com seus modificadores de acesso é uma aproximação disso.
-
-- **Namespace** é o mecanismo que evita colisões de nome: dois módulos em
-  namespaces distintos podem ter identificadores (nomes) iguais sem conflito. Em
-  Java, o namespace de uma classe é o caminho completo do pacote —
-  `com.bank.account.BankAccount` e `com.audit.account.BankAccount` são entidades
-  diferentes, mesmo tendo o mesmo nome simples (`BankAccount`).
-
-- **Pacote** (_package_) é uma forma de agrupar módulos relacionados sob um
-  mesmo namespace. O conceito existe em várias linguagens — Java usa `package
-com.bank.account`, Python organiza pacotes como diretórios com `__init__.py`,
-  Go e Kotlin têm sua própria declaração de `package`. A implementação varia,
-  mas a ideia é a mesma: agrupar o que pertence junto e definir um prefixo de
-  namespace para evitar colisões.
-
-- **Biblioteca** é um conjunto de pacotes e módulos distribuído para reuso por
-  outros projetos. Ela não é executada diretamente — é incorporada ao seu
-  programa, que passa a usar as definições que ela fornece.
-
-A hierarquia entre esses conceitos:
-
-```mermaid
-graph TD
-    LIB["Biblioteca\nexemplo: Guava"]
-    PKG1["Pacote\ncom.google.common.collect"]
-    PKG2["Pacote\ncom.google.common.io"]
-    MOD1["Módulo\nImmutableList"]
-    MOD2["Módulo\nImmutableMap"]
-    MOD3["Módulo\nFiles"]
-
-    LIB --> PKG1 & PKG2
-    PKG1 --> MOD1 & MOD2
-    PKG2 --> MOD3
-```
-
-No código Java, todos esses conceitos aparecem de uma vez só:
-
-```java
-// Arquivo: BankAccount.java  ← unidade física no disco
-package com.bank.account;     // ← define o pacote e o namespace
-
-// BankAccount é o módulo — fronteira entre público e privado
-public class BankAccount {
-
-    private double balance;  // privado: detalhe interno, inacessível de fora
-
-    public boolean withdraw(double amount) {  // público: interface visível
-        if (amount <= 0 || amount > balance) return false;
-        balance -= amount;
-        return true;
-    }
-}
-
-// Para usar este módulo em outro arquivo:
-// import com.bank.account.BankAccount;
-//
-// O nome completo — com.bank.account.BankAccount — garante que não há
-// conflito com um eventual BankAccount em outro pacote.
-```
-
-#### A analogia da casa
-
-Se os termos técnicos ainda parecerem abstratos, pense assim:
-
-- **Arquivo** = caixa de papelão no armário. Ocupa um lugar físico, mas a caixa
-  não sabe o que tem dentro.
-- **Módulo** = armário com portas de vidro e gavetas fechadas. A vitrine mostra
-  o que qualquer visitante pode usar; as gavetas escondem a organização interna.
-- **Namespace** = etiqueta com o nome do dono. A gaveta da Maria e a gaveta do
-  João podem ter uma "chave" cada — a etiqueta resolve a ambiguidade.
-- **Pacote** = cômodo da casa. Agrupa os móveis (módulos) do mesmo assunto; o
-  Quarto tem guarda-roupa e criado-mudo, a Cozinha tem armários de louça.
-- **Biblioteca** = conjunto de móveis planejados encomendado de uma loja. Você
-  não monta cada peça do zero — recebe os cômodos, móveis e etiquetas prontos
-  para usar.
 
 ---
 

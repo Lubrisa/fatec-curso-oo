@@ -76,6 +76,15 @@ static void printLine(String text) {
 }
 ```
 
+> **Convenção de Nomenclatura**
+>
+> Nomes de métodos usam **camelCase**: primeira palavra em minúsculo, cada
+> palavra seguinte começa em maiúsculo (`circleArea`, `getBalance`,
+> `printLine`).
+>
+> Por representarem ações ou operações, métodos costumam ser nomeados com verbos
+> ou expressões verbais (`deposit`, `withdraw`, `calculateTotal`).
+
 Os **parâmetros** são variáveis locais que recebem os valores passados pelo
 chamador — existem apenas dentro do método. Quando você chama `circleArea(5.0)`,
 o valor `5.0` é o **argumento** passado para o parâmetro `radius`.

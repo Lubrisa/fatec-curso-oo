@@ -46,6 +46,16 @@ int x;
 System.out.println(x);  // erro de compilação: "variable x might not have been initialized"
 ```
 
+> **Convenção de Nomenclatura**
+>
+> Java usa **camelCase** para variáveis: primeira palavra em minúsculo, cada
+> palavra seguinte começa em maiúsculo (`accountBalance`, `customerName`,
+> `isActive`).
+>
+> Nomes devem ser descritivos (`balance` é melhor que `b`; `customerName` é
+> melhor que `cn`). A exceção convencional são variáveis de controle de laço
+> curtas, como `i`, `j`, `k`.
+
 ## Categorias de Variáveis
 
 Dependendo de onde uma variável é declarada, ela recebe um nome diferente:
@@ -156,24 +166,6 @@ var account = new BankAccount(1000.0);
 // tipo não claro — declarar explicitamente ajuda quem lê
 Invoice result = process(data);  // o que process retorna? com var, não daria para saber
 ```
-
-## Convenções de Nomenclatura
-
-Java usa **camelCase** para variáveis: primeira palavra em minúsculo, cada
-palavra seguinte começa em maiúsculo.
-
-```java
-int accountBalance;
-String customerName;
-boolean isActive;
-```
-
-Nomes devem ser descritivos. `balance` é melhor que `b`; `customerName` é melhor
-que `cn`. A exceção convencional são variáveis de controle de laço curtas, como
-`i`, `j`, `k`.
-
-Como visto no capítulo 1, identificadores em código Java seguem o inglês —
-`accountBalance`, não `saldoConta`.
 
 ---
 

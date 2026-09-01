@@ -74,8 +74,11 @@ static final String BANK_NAME = "Banco Digital";   // String é imutável — se
 static List<String> accountLog = new ArrayList<>(); // mutável — problemático
 ```
 
-> **Convenção:** constantes estáticas usam `UPPER_SNAKE_CASE` — todas as letras
-> maiúsculas, palavras separadas por `_`.
+> **Convenção de Nomenclatura**
+>
+> Constantes estáticas (`static final`) usam **`UPPER_SNAKE_CASE`**: todas as
+> letras maiúsculas, com palavras separadas por sublinhado `_` (`INTEREST_RATE`,
+> `BANK_NAME`, `MAX_RETRIES`).
 
 ## Métodos
 

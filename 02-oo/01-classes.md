@@ -118,6 +118,11 @@ class NomeDaClasse {
 }
 ```
 
+> **Convenção de Nomenclatura**
+>
+> Nomes de classe usam **PascalCase**: cada palavra começa com maiúscula, sem
+> separadores (`BankAccount`, `CustomerOrder`, `ProductCatalog`).
+
 Dentro do bloco delimitado por chaves (`{ }`), definimos os **membros** da
 classe — tudo aquilo que pertence à classe ou aos objetos criados a partir dela:
 
@@ -127,11 +132,6 @@ classe — tudo aquilo que pertence à classe ou aos objetos criados a partir de
 - **Classes aninhadas** — classes declaradas dentro de outra classe.
 
 Vamos explorar detalhadamente cada um desses conceitos ao longo deste módulo.
-
-> **Convenção de nome**
->
-> Nomes de classe usam **PascalCase**: cada palavra começa com maiúscula, sem
-> separadores. `BankAccount`, `CustomerOrder`, `ProductCatalog`.
 
 ---
 

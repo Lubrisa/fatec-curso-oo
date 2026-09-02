@@ -76,6 +76,28 @@ gerado:
   campo, usado para deixar clara a intenção de que o campo nunca deve ser
   acessado externamente, nem mesmo por subclasses)
 
+### Boas Práticas: Evite Expor Setters Indiscriminadamente
+
+Nas melhores práticas de engenharia de software e Orientação a Objetos, a regra
+de ouro é: **evite ao máximo permitir que partes externas do programa alterem o
+estado interno do seu objeto livremente**.
+
+Quando colocamos `@Setter` no topo da classe, transformamos todos os atributos
+em campos mutáveis sem qualquer proteção, enfraquecendo o **encapsulamento**.
+
+Em vez de usar `@Setter` automaticamente:
+
+1. **Prefira métodos de domínio expressivos:** Em vez de expor um
+   `setBalance(double)` que permite atribuir qualquer número, crie métodos com
+   significado real no sistema, como `deposit(double amount)` e `withdraw(double amount)`.
+2. **Escreva o setter manualmente quando estritamente necessário:** Se um campo
+   realmente precisar de alteração externa via setter, prefira escrevê-lo na mão
+   com as devidas validações. O Lombok é inteligente: se você declarar o método
+   manualmente, ele **não gerará outro por cima**.
+3. **Use `@Setter` pontualmente:** Caso precise de um setter simples, coloque a
+   anotação apenas sobre o atributo específico que necessita de alteração, e não
+   na classe inteira.
+
 ## 2. Representação Textual (`@ToString`)
 
 O método `toString()` padrão herdado da classe `Object` imprime apenas o nome da

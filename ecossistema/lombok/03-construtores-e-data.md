@@ -136,6 +136,55 @@ p1.setName("Mouse");
 Product p2 = new Product(1L, "Teclado", 250.0);
 ```
 
+### Validações na Criação e Métodos de Fábrica Estáticos
+
+Os construtores gerados pelo Lombok apenas realizam atribuições diretas aos
+campos. Se a sua classe precisa **validar regras de negócio no momento da
+criação** (por exemplo: garantir que um preço não seja negativo ou que o saldo
+respeite um limite mínimo):
+
+1. **Escreva o construtor manualmente:** O Lombok respeita construtores
+   manuais. Se você declarar um construtor explícito com validações, ele não
+   tentará sobrescrevê-lo.
+2. **Construtor Privado do Lombok + Método de Fábrica Estático Manual:**
+   Podemos instruir o Lombok a gerar o construtor com visibilidade **privada**
+   (`access = AccessLevel.PRIVATE`) para impedir que objetos sejam criados sem
+   controle. Em seguida, escrevemos um **método de fábrica estático manual** com
+   as validações necessárias:
+
+```java
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE) // 🔒 Construtor privado gerado pelo Lombok
+public class Money {
+
+    private final double amount;
+    private final String currency;
+
+    // Método de fábrica estático escrito manualmente com validações:
+    public static Money of(double amount, String currency) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("O valor monetário não pode ser negativo: " + amount);
+        }
+        if (currency == null || currency.isBlank()) {
+            throw new IllegalArgumentException("A moeda deve ser informada");
+        }
+        return new Money(amount, currency.toUpperCase());
+    }
+}
+```
+
+Dessa forma, o código cliente é forçado a passar pelas validações de negócio:
+
+```java
+Money price = Money.of(150.0, "BRL"); // ✅ Válido
+
+Money invalid = Money.of(-50.0, "BRL"); // 💥 Lança IllegalArgumentException!
+```
+
 ## 2. O Atalho Agregador: `@Data`
 
 Ao criar classes simples destinadas apenas a transportar ou agrupar dados, é

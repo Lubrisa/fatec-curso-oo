@@ -1,4 +1,4 @@
-# 4. Lombok vs Records
+# 5. Lombok vs Records
 
 Com a chegada do Java 16, a linguagem introduziu um novo tipo nativo para
 representar dados concisos: os **Records**.
@@ -102,7 +102,8 @@ lmb.setName("Novo Nome"); // ✅ Permitido com @Setter
   todo record já herda internamente de `java.lang.Record`). Ele pode apenas
   implementar interfaces (`implements`).
 - **Lombok:** São classes Java normais, com suporte completo a **herança de
-  classes**, classes abstratas e polimorfismo (`public class Client extends Person`).
+  classes**, classes abstratas e polimorfismo (`public class Client extends
+Person`).
 
 ## 2. Bússola de Decisão: Quando Usar Cada Um?
 
@@ -117,4 +118,5 @@ lmb.setName("Novo Nome"); // ✅ Permitido com @Setter
 
 ---
 
-<a href="03-construtores-e-data.md">← 3. Construtores Automáticos e @Data</a>
+<a href="04-anotacoes-agregadoras-data-e-value.md">← 4. Anotações Agregadoras:
+@Data e @Value</a>

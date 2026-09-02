@@ -1,17 +1,17 @@
-# 3. Construtores Automáticos e @Data
+# 3. Construtores Automáticos
 
 No capítulo anterior, vimos como o Lombok elimina o código repetitivo de métodos
 de acesso, impressão e comparação.
 
 Neste capítulo, vamos aprender a automatizar a criação de **construtores** com
-diferentes finalidades e a utilizar o atalho mais famoso da biblioteca: a
-anotação agregadora **`@Data`**.
+diferentes finalidades e a aplicar boas práticas de encapsulamento para garantir
+que nossos objetos sejam sempre instanciados em um estado válido.
 
-## 1. Construtores Automáticos
+## 1. As Anotações de Construtor
 
 Escrever construtores manualmente pode ser tedioso, especialmente quando uma
-classe precisa de múltiplos construtores (um vazio para frameworks e outro
-completo para inicialização rápida).
+classe precisa de múltiplos construtores (um protegido para frameworks e outro
+completo para inicialização pela aplicação).
 
 O Lombok disponibiliza três anotações complementares para gerenciar
 construtores:
@@ -21,9 +21,10 @@ construtores:
 Gera um construtor sem nenhum parâmetro:
 
 ```java
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Client {
     private Long id;
     private String name;
@@ -33,15 +34,21 @@ public class Client {
 O Lombok gera nos bastidores:
 
 ```java
-public Client() {
+protected Client() {
 }
 ```
 
-> **Por que o construtor vazio é tão importante?**
+> **Por que o construtor vazio existe e por que torná-lo `PROTECTED`?**
 >
 > Muitas bibliotecas (como o Jackson para leitura de JSON e o Hibernate para
 > bancos de dados) exigem obrigatoriamente um construtor sem argumentos para
-> conseguir instanciar objetos e preencher seus dados automaticamente.
+> conseguir instanciar objetos e preencher seus dados automaticamente por
+> reflexão.
+>
+> Ao definir `access = AccessLevel.PROTECTED`, nós **satisfazemos a exigência
+> dos frameworks** e, ao mesmo tempo, **protegemos nossa aplicação**, impedindo
+> que outras partes do código criem instâncias vazias em estado incompleto ou
+> inválido (`new Client()`).
 
 ### 2. Construtor Completo (`@AllArgsConstructor`)
 
@@ -105,21 +112,21 @@ public BankAccount(String accountNumber, String holder) {
 }
 ```
 
-### Combinando Construtores
+### Combinando Construtores com Segurança
 
-É muito comum combinarmos `@NoArgsConstructor` e `@AllArgsConstructor` na mesma
-classe para ter flexibilidade total de instanciação:
+Em classes que interagem com frameworks, é muito comum combinarmos
+`@NoArgsConstructor(access = AccessLevel.PROTECTED)` e `@AllArgsConstructor` na
+mesma classe:
 
 ```java
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // Frameworks usam nos bastidores
+@AllArgsConstructor // Código da aplicação usa para criar objetos válidos
 public class Product {
     private Long id;
     private String name;
@@ -128,12 +135,11 @@ public class Product {
 ```
 
 ```java
-// Criando com construtor vazio:
-Product p1 = new Product();
-p1.setName("Mouse");
+// O código da aplicação é obrigado a fornecer todos os dados válidos:
+Product prod = new Product(1L, "Teclado", 250.0);
 
-// Criando com construtor completo:
-Product p2 = new Product(1L, "Teclado", 250.0);
+// Product vazio é bloqueado para código externo:
+// Product invalid = new Product(); // ❌ Erro de compilação fora do pacote/herança!
 ```
 
 ### Validações na Criação e Métodos de Fábrica Estáticos
@@ -143,14 +149,13 @@ campos. Se a sua classe precisa **validar regras de negócio no momento da
 criação** (por exemplo: garantir que um preço não seja negativo ou que o saldo
 respeite um limite mínimo):
 
-1. **Escreva o construtor manualmente:** O Lombok respeita construtores
-   manuais. Se você declarar um construtor explícito com validações, ele não
-   tentará sobrescrevê-lo.
-2. **Construtor Privado do Lombok + Método de Fábrica Estático Manual:**
-   Podemos instruir o Lombok a gerar o construtor com visibilidade **privada**
-   (`access = AccessLevel.PRIVATE`) para impedir que objetos sejam criados sem
-   controle. Em seguida, escrevemos um **método de fábrica estático manual** com
-   as validações necessárias:
+1. **Escreva o construtor manualmente:** O Lombok respeita construtores manuais.
+   Se você declarar um construtor explícito com validações, ele não tentará
+   sobrescrevê-lo.
+2. **Construtor Privado do Lombok + Método de Fábrica Estático Manual:** Podemos
+   instruir o Lombok a gerar o construtor com visibilidade **privada** (`access = AccessLevel.PRIVATE`)
+   para impedir que objetos sejam criados sem controle. Em seguida, escrevemos
+   um **método de fábrica estático manual** com as validações necessárias:
 
 ```java
 import lombok.AccessLevel;
@@ -185,64 +190,9 @@ Money price = Money.of(150.0, "BRL"); // ✅ Válido
 Money invalid = Money.of(-50.0, "BRL"); // 💥 Lança IllegalArgumentException!
 ```
 
-## 2. O Atalho Agregador: `@Data`
-
-Ao criar classes simples destinadas apenas a transportar ou agrupar dados, é
-muito frequente precisarmos de quase todas as anotações do Lombok ao mesmo tempo
-(`@Getter`, `@Setter`, `@ToString`, `@EqualsAndHashCode` e construtor).
-
-Para evitar ter que digitar 5 ou 6 anotações no topo de cada classe, o Lombok
-oferece a anotação **`@Data`**.
-
-```mermaid
-graph TD
-    DATA["<b>@Data</b><br/><i>(Atalho Tudo-em-Um)</i>"] --> G["@Getter"]
-    DATA --> S["@Setter"]
-    DATA --> T["@ToString"]
-    DATA --> E["@EqualsAndHashCode"]
-    DATA --> R["@RequiredArgsConstructor"]
-```
-
-### Exemplo de Uso:
-
-```java
-import lombok.Data;
-
-@Data
-public class ClientDTO {
-    private Long id;
-    private String name;
-    private String email;
-}
-```
-
-Com apenas essa anotação, a classe `ClientDTO` ganha automaticamente:
-
-- Getters e Setters para todos os campos.
-- Método `toString()` formatado.
-- Métodos `equals()` e `hashCode()` baseados em todos os campos.
-- Construtor `@RequiredArgsConstructor`.
-
-## 3. Cuidados Importantes ao Usar `@Data`
-
-Embora `@Data` seja extremamente prático e popular, devemos utilizá-la com
-consciência:
-
-1. **Quebra de Encapsulamento com Setters Públicos:**  
-   `@Data` cria setters públicos para todos os atributos não-finais. Se a sua
-   classe tiver regras rígidas onde alguns dados não podem ser alterados
-   diretamente por qualquer parte do programa (como o `balance` de uma conta
-   bancária), prefira usar anotações individuais (`@Getter`, `@ToString`, etc.)
-   em vez de `@Data`.
-
-2. **Classes com Lógica de Negócio Rica:**  
-   Para classes de domínio ricas em métodos próprios e regras de validação,
-   escolher explicitamente cada anotação (`@Getter`, `@NoArgsConstructor`, etc.)
-   deixa a intenção do design muito mais clara e segura.
-
 ---
 
 <a href="02-anotacoes-de-acesso-e-utilidades.md">← 2. Anotações de Acesso e
 Utilidades</a>
 
-<p align="right"><a href="04-lombok-vs-records.md">Próximo: Lombok vs Records →</a></p>
+<p align="right"><a href="04-anotacoes-agregadoras-data-e-value.md">Próximo: Anotações Agregadoras: @Data e @Value →</a></p>

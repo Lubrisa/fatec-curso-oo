@@ -280,4 +280,4 @@ public class User {
 
 <a href="01-fundamentos-e-setup.md">← 1. Fundamentos e Setup do Lombok</a>
 
-<p align="right"><a href="03-construtores-e-data.md">Próximo: Construtores Automáticos e @Data →</a></p>
+<p align="right"><a href="03-construtores-automaticos.md">Próximo: Construtores Automáticos →</a></p>

@@ -128,13 +128,13 @@ public class FindAllDemo {
 }
 ```
 
-No próximo capítulo, aprenderemos como organizar todo esse código de persistência
-de forma elegante e profissional através do **Padrão DAO (_Data Access Object_)**
-e como garantir atomicidade com **Transações**.
+No próximo capítulo, aprenderemos como garantir a integridade dos dados e
+a consistência do banco em operações críticas utilizando **Transações e
+Atomicidade**.
 
 ---
 
 <a href="04-operacoes-de-escrita.md">← 4. Operações de Escrita (INSERT, UPDATE,
 DELETE)</a>
 
-<p align="right"><a href="06-padrao-dao-e-transacoes.md">Próximo: Padrão DAO e Transações →</a></p>
+<p align="right"><a href="06-transacoes-e-atomicidade.md">Próximo: Transações e Atomicidade →</a></p>

@@ -39,7 +39,7 @@ Aplicando ao sistema bancário:
 ```java
 // apenas dados — sem comportamento próprio
 class AccountData {
-    String holder;
+    String owner;
     double balance;
 }
 

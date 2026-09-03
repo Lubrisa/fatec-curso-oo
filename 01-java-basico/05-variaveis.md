@@ -74,7 +74,7 @@ Cada objeto criado a partir da classe tem sua própria cópia:
 ```java
 public class BankAccount {
     private double balance;  // campo de instância
-    private String holder;
+    private String owner;
 }
 ```
 
@@ -146,7 +146,7 @@ de classe, parâmetros de método, ou quando não há valor inicial:
 
 ```java
 class BankAccount {
-    var holder;                         // erro: não pode usar var em campos de classe
+    var owner;                         // erro: não pode usar var em campos de classe
 
     void processPayment(var amount) {   // erro: não pode usar var em parâmetros
         var x;                          // erro: não pode usar var sem inicialização

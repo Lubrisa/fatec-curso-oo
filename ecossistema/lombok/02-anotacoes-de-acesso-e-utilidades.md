@@ -55,7 +55,7 @@ public class BankAccount {
 
     @Getter
     @Setter
-    private String holder; // Getter e Setter públicos
+    private String owner; // Getter e Setter públicos
 
     @Getter
     @Setter(AccessLevel.PROTECTED)

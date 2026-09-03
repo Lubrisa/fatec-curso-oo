@@ -94,7 +94,7 @@ public class BankAccount {
     private final String accountNumber; // Obrigatório por ser final
 
     @NonNull
-    private String holder; // Obrigatório por ser @NonNull
+    private String owner; // Obrigatório por ser @NonNull
 
     private double balance; // Opcional (não entra no construtor)
 }
@@ -103,12 +103,12 @@ public class BankAccount {
 O Lombok gera nos bastidores:
 
 ```java
-public BankAccount(String accountNumber, String holder) {
-    if (holder == null) {
-        throw new NullPointerException("holder is marked non-null but is null");
+public BankAccount(String accountNumber, String owner) {
+    if (owner == null) {
+        throw new NullPointerException("owner is marked non-null but is null");
     }
     this.accountNumber = accountNumber;
-    this.holder = holder;
+    this.owner = owner;
 }
 ```
 

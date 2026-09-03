@@ -10,6 +10,10 @@ famílias:
 - **Declarativo:** você descreve _o quê_ deseja obter como resultado, delegando
   para a linguagem ou biblioteca o controle de como executar esse processo.
 
+Após aprendermos a parametrizar tipos de dados com
+[Generics](../02-generics/01-fundamentos.md), damos agora o próximo salto de
+expressividade no Java Moderno: **parametrizar comportamentos**.
+
 A **Programação Funcional** (_Functional Programming_ ou _FP_) é um dos pilares
 mais importantes da família declarativa. Ela modela a computação como a
 avaliação de funções matemáticas, tratando dados e regras de transformação de
@@ -262,5 +266,7 @@ concorrência onde duas threads tentam alterar a mesma memória ao mesmo tempo.
 > promoções no futuro?
 
 ---
+
+<a href="../02-generics/01-fundamentos.md">← Submódulo 02 — Generics</a>
 
 <p align="right"><a href="02-interfaces-funcionais-e-classes-anonimas.md">Próximo: Interfaces Funcionais e Classes Anônimas →</a></p>

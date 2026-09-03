@@ -14,7 +14,7 @@ Com o Java 8, a linguagem introduziu uma abordagem muito mais segura, explícita
 e funcional para lidar com valores ausentes: a classe **`Optional<T>`** (no
 pacote `java.util`).
 
-## 1. O Problema do `null` no Dia a Dia
+## O Problema do `null` no Dia a Dia
 
 Imagine um repositório que busca uma conta bancária pelo seu número de
 identificação:
@@ -48,7 +48,7 @@ O grande problema do `null` é a **falta de expressividade**: a assinatura do
 método `BankAccount findById(String id)` promete que devolve um `BankAccount`,
 mas o compilador não ajuda a lembrar que o resultado pode ser nulo.
 
-## 2. O Que É o `Optional<T>`?
+## O Que É o `Optional<T>`?
 
 O **`Optional<T>`** é um contêiner (uma "caixa") que pode conter **exatamente um
 valor do tipo `T`** ou estar **vazio**.
@@ -78,7 +78,7 @@ public Optional<BankAccount> findById(String id) {
 Agora, quem chama o método não pode acessar a conta diretamente sem antes lidar
 com a possibilidade de ela estar vazia.
 
-## 3. Criando Instâncias de `Optional`
+## Criando Instâncias de `Optional`
 
 Existem três métodos estáticos de fábrica para criar um `Optional`:
 
@@ -111,7 +111,7 @@ Cria explicitamente uma "caixa vazia":
 Optional<BankAccount> notFound = Optional.empty();
 ```
 
-## 4. Operações Fluentes e Estilo Funcional
+## Operações Fluentes e Estilo Funcional
 
 O grande poder do `Optional` não está em fazer `if (opt.isPresent())`, mas sim
 em utilizar seus **métodos funcionais encadeados** com Expressões Lambda.
@@ -170,7 +170,7 @@ Optional<String> cardNumber = accountRepository.findById("001")
     .flatMap(getCardNumber);
 ```
 
-## 5. Extraindo Valores com Segurança
+## Extraindo Valores com Segurança
 
 Quando você finalmente precisa do dado bruto encapsulado dentro do `Optional`,
 existem três alternativas seguras:
@@ -208,7 +208,7 @@ BankAccount account = accountRepository.findById("001")
 
 ---
 
-## 6. Boas Práticas e Anti-patterns com `Optional`
+## Boas Práticas e Anti-patterns com `Optional`
 
 Para aproveitar o `Optional` com excelência em projetos reais, siga estas regras
 de design:

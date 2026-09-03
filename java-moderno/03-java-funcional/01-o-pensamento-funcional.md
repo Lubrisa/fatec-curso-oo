@@ -24,7 +24,7 @@ objetivo é **construir o modelo mental funcional**: entender os conceitos que
 revolucionaram o desenvolvimento de software e que transformaram o Java a partir
 da versão 8.
 
-## 1. Funções de Primeira Classe (_First-Class Functions_)
+## Funções de Primeira Classe (_First-Class Functions_)
 
 Em linguagens procedurais tradicionais e nas primeiras versões do Java, existia
 uma separação rígida entre dois mundos:
@@ -110,7 +110,7 @@ início do curso.
 > o **comportamento** (a receita da operação) que ele deve aplicar sobre esses
 > dados.
 
-## 2. Funções de Ordem Superior (_Higher-Order Functions_)
+## Funções de Ordem Superior (_Higher-Order Functions_)
 
 Se as funções agora podem viajar pelo código como valores, chegamos naturalmente
 ao conceito mais poderoso da programação funcional: as **Funções de Ordem
@@ -190,7 +190,7 @@ qual critério você inventará amanhã; ela apenas recebe a sua regra por parâ
 e a aplica para cada elemento. Mais adiante, veremos que o Java já traz essa
 mecânica pronta e otimizada por meio da **Streams API**.
 
-## 3. O Casamento OO + Funcional no Java Moderno
+## O Casamento OO + Funcional no Java Moderno
 
 Java não é uma linguagem puramente funcional (como Haskell ou Clojure), e isso é
 intencional. Java é uma linguagem **multiparadigma pragmática**:

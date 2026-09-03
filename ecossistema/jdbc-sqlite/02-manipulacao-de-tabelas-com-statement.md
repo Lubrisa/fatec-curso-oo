@@ -10,7 +10,7 @@ Neste capítulo, aprenderemos a utilizar comandos **DDL** (_Data Definition
 Language_) para criar, alterar e excluir tabelas através do objeto
 **`Statement`**.
 
-## 1. O que é o `Statement`?
+## O que é o `Statement`?
 
 A interface **`Statement`** (do pacote `java.sql`) representa o canal pelo qual
 enviamos instruções SQL estáticas e diretas para o banco de dados.
@@ -33,7 +33,7 @@ try (Connection conn = DriverManager.getConnection(url);
 > deve ser declarado dentro do _try-with-resources_ para ser liberado
 > automaticamente após o uso.
 
-## 2. Tipos de Dados no SQLite vs Java
+## Tipos de Dados no SQLite vs Java
 
 Ao criar tabelas no SQLite, utilizamos tipos de dados compatíveis com as classes
 e primitivos do Java:
@@ -46,7 +46,7 @@ e primitivos do Java:
 | **`INTEGER`** | `Boolean`\*                          | Convenção comum: `0 = false`, `1 = true`. SQLite não possui um tipo booleano nativo.                 |
 | **`BLOB`**    | `byte[]`                             | Dados binários brutos (imagens, arquivos compactados).                                               |
 
-## 3. Criando Tabelas (`CREATE TABLE IF NOT EXISTS`)
+## Criando Tabelas (`CREATE TABLE IF NOT EXISTS`)
 
 Para executar instruções DDL (como criar ou modificar tabelas), utilizamos o
 método **`execute(sql)`** do `Statement`:
@@ -90,7 +90,7 @@ public class CreateTableDemo {
 > garante que a instrução seja idempotente (ou seja, pode ser executada
 > toda vez que o programa iniciar sem quebrar a aplicação).
 
-## 4. Alterando a Estrutura de Tabelas (`ALTER TABLE`)
+## Alterando a Estrutura de Tabelas (`ALTER TABLE`)
 
 Se o modelo de dados da aplicação evoluir e precisarmos adicionar uma nova
 coluna a uma tabela já existente no banco de dados, utilizamos o comando
@@ -110,7 +110,7 @@ try (Connection conn = DriverManager.getConnection(url);
 }
 ```
 
-## 5. Excluindo Tabelas (`DROP TABLE IF EXISTS`)
+## Excluindo Tabelas (`DROP TABLE IF EXISTS`)
 
 Em rotinas de testes automatizados ou reinicialização de ambientes de
 desenvolvimento, pode ser necessário apagar completamente uma tabela e seus

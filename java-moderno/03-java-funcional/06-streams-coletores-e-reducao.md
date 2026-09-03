@@ -12,7 +12,7 @@ São essas operações que fecham o fluxo da Stream e materializam os dados na
 forma de novos objetos, listas, conjuntos, mapas agrupados ou relatórios
 consolidados.
 
-## 1. A Natureza Descartável das Streams (Consumo Único)
+## A Natureza Descartável das Streams (Consumo Único)
 
 Antes de examinarmos as operações terminais em detalhes, é fundamental
 compreender uma regra de ouro da arquitetura de Streams: **uma Stream não é uma
@@ -62,7 +62,7 @@ List<BankAccount> list = accounts.stream()
     .toList();
 ```
 
-## 2. Operações Terminais Básicas
+## Operações Terminais Básicas
 
 Uma operação terminal é aquela que inicia a execução de todo o pipeline e
 **encerra a Stream**, materializando o resultado final.
@@ -153,7 +153,7 @@ Optional<BankAccount> vip = accounts.stream()
     .findFirst();
 ```
 
-## 3. Redução Genérica de Fluxos (`reduce`)
+## Redução Genérica de Fluxos (`reduce`)
 
 A operação **`reduce`** (redução ou acumulação) combina todos os elementos de
 uma Stream em um único valor resultante através da aplicação repetida de uma
@@ -196,7 +196,7 @@ Optional<Double> total = balances.stream()
     .reduce(Double::sum);
 ```
 
-## 4. O Poder dos Coletores (`Collectors`)
+## O Poder dos Coletores (`Collectors`)
 
 Embora `.toList()` atenda a maioria dos casos simples, muitas situações de
 negócio exigem transformações mais complexas: agrupar itens por categoria,

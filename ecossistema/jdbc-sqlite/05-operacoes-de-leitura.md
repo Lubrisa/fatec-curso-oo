@@ -7,7 +7,7 @@ Neste capítulo, vamos aprender a realizar consultas de leitura utilizando o
 comando **`SELECT`** e a manipular os dados retornados através do cursor
 **`ResultSet`**, convertendo linhas de tabelas relacionais em objetos Java.
 
-## 1. O Método `executeQuery()`
+## O Método `executeQuery()`
 
 Diferente das operações de escrita, as instruções de leitura (`SELECT`) são
 executadas através do método **`executeQuery()`**.
@@ -36,7 +36,7 @@ try (Connection conn = DriverManager.getConnection(url);
 > dentro do _try-with-resources_ garante que o cursor de leitura no banco seja
 > liberado imediatamente após o término do processamento.
 
-## 2. Como Funciona o Cursor `ResultSet`?
+## Como Funciona o Cursor `ResultSet`?
 
 O `ResultSet` funciona como um **cursor** que aponta para uma linha da tabela de
 resultados por vez.
@@ -57,7 +57,7 @@ graph TD
     L2 --> NEXT3["<b>rs.next()</b> → false (Fim dos dados)"]
 ```
 
-## 3. Extração Tipada de Colunas
+## Extração Tipada de Colunas
 
 Uma vez posicionado em uma linha válida, você extrai os valores de cada coluna
 utilizando métodos tipados:
@@ -77,7 +77,7 @@ utilizando métodos tipados:
 > `rs.getString("name")`). Nomes deixam o código muito mais legível e evitam
 > erros se a ordem das colunas no `SELECT` for alterada no futuro.
 
-## 4. Consultando Múltiplos Registros (`while (rs.next())`)
+## Consultando Múltiplos Registros (`while (rs.next())`)
 
 Para listar todos os produtos do banco de dados e convertê-los em uma lista de
 objetos Java (`List<Product>`):

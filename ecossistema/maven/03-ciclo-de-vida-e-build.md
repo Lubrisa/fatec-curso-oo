@@ -8,7 +8,7 @@ Neste capítulo, vamos compreender como o Maven processa e constrói o software 
 prática: o **Ciclo de Vida de Build** (_Build Lifecycle_), os principais
 comandos de terminal e a geração do arquivo executável final (`.jar`).
 
-## 1. O Que É o Ciclo de Vida de Build?
+## O Que É o Ciclo de Vida de Build?
 
 O Maven não é apenas um gerenciador de dependências: ele é um **orquestrador do
 processo de build**.
@@ -43,7 +43,7 @@ Por exemplo:
 > processo imediatamente** e não gera o pacote `.jar`. Isso garante que código
 > com bugs nunca chegue aos servidores de produção.
 
-## 2. As Principais Fases do Ciclo de Vida
+## As Principais Fases do Ciclo de Vida
 
 O Maven possui três ciclos de vida independentes: **`clean`** (limpeza),
 **`default`** (construção e empacotamento) e **`site`** (documentação).
@@ -59,7 +59,7 @@ As fases mais importantes do dia a dia são:
 | **`package`**  | Pega o código compilado e empacota no formato definido no POM (geralmente um arquivo `.jar`).                                                        |
 | **`install`**  | Copia o `.jar` gerado para o repositório local da sua máquina (`~/.m2/repository`), permitindo que outros projetos seus o utilizem como dependência. |
 
-## 3. Comandos Essenciais do Maven
+## Comandos Essenciais do Maven
 
 Você pode executar os comandos do Maven diretamente no terminal da IDE na raiz
 do projeto (onde fica o `pom.xml`):
@@ -92,7 +92,7 @@ mvn clean package
   compilações anteriores, compila tudo, roda todos os testes e gera o arquivo
   `.jar` na pasta `target/`.
 
-## 4. A Pasta `target/` e Executando o `.jar`
+## A Pasta `target/` e Executando o `.jar`
 
 Após rodar o comando `mvn package` com sucesso, o Maven cria uma nova pasta na
 raiz do projeto chamada **`target/`**:

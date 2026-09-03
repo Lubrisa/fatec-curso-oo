@@ -8,7 +8,7 @@ métodos de leitura (_getters_), escrita (_setters_), representação textual
 (`toString`) e comparação de objetos (`equals` e `hashCode`), mantendo o código
 limpo e protegido.
 
-## 1. Métodos de Leitura e Escrita (`@Getter` e `@Setter`)
+## Métodos de Leitura e Escrita (`@Getter` e `@Setter`)
 
 As anotações **`@Getter`** e **`@Setter`** instruem o Lombok a criar os métodos
 padrão de acesso aos campos da classe (como `getName()` e `setName(String
@@ -98,7 +98,7 @@ Em vez de usar `@Setter` automaticamente:
    anotação apenas sobre o atributo específico que necessita de alteração, e não
    na classe inteira.
 
-## 2. Representação Textual (`@ToString`)
+## Representação Textual (`@ToString`)
 
 O método `toString()` padrão herdado da classe `Object` imprime apenas o nome da
 classe seguido do endereço hexadecimal de memória (ex: `Client@6d06d69c`), o que
@@ -164,7 +164,7 @@ System.out.println(user);
 // Observe que a senha foi omitida com segurança!
 ```
 
-## 3. Comparação e Estruturas de Dados (`@EqualsAndHashCode`)
+## Comparação e Estruturas de Dados (`@EqualsAndHashCode`)
 
 Para que dois objetos possam ser comparados corretamente pelo conteúdo (através
 de `.equals()`) ou armazenados em coleções como `HashSet` ou chaves de
@@ -207,7 +207,7 @@ public class Client {
 }
 ```
 
-## 4. Comparativo: Antes vs Depois do Lombok
+## Comparativo: Antes vs Depois do Lombok
 
 Veja a transformação da nossa classe `User`:
 

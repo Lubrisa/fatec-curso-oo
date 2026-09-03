@@ -7,7 +7,7 @@ Neste capítulo, vamos aprender a automatizar a criação de **construtores** co
 diferentes finalidades e a aplicar boas práticas de encapsulamento para garantir
 que nossos objetos sejam sempre instanciados em um estado válido.
 
-## 1. As Anotações de Construtor
+## As Anotações de Construtor
 
 Escrever construtores manualmente pode ser tedioso, especialmente quando uma
 classe precisa de múltiplos construtores (um protegido para frameworks e outro

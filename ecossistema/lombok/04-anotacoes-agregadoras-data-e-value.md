@@ -13,7 +13,7 @@ Para esses cenários, o Lombok oferece duas **anotações agregadoras**:
 - **`@Data`:** O atalho completo para classes **mutáveis**.
 - **`@Value`:** O atalho completo para classes **100% imutáveis**.
 
-## 1. O Atalho Mutável: `@Data`
+## O Atalho Mutável: `@Data`
 
 A anotação **`@Data`** é o atalho "tudo-em-um" mais popular do Lombok.
 
@@ -48,7 +48,7 @@ Ao adicionar `@Data`, a classe `ClientDTO` ganha automaticamente nos bastidores:
 - Métodos `equals()` e `hashCode()` baseados em todos os campos.
 - Construtor `@RequiredArgsConstructor`.
 
-## 2. O Atalho Imutável: `@Value`
+## O Atalho Imutável: `@Value`
 
 Se a sua intenção é criar uma classe **completamente imutável** (onde os dados
 são definidos na criação e nunca mais podem ser alterados), o Lombok oferece a
@@ -92,7 +92,7 @@ System.out.println(req.getUsername()); // ✅ Leitura permitida
 // req.setUsername("outro"); // ❌ Erro de compilação: setters não existem!
 ```
 
-## 3. Como Controlar ou Bloquear Setters no `@Data`
+## Como Controlar ou Bloquear Setters no `@Data`
 
 Se você estiver utilizando `@Data`, mas desejar que alguns ou todos os atributos
 não tenham métodos setters, existem duas abordagens:
@@ -128,7 +128,7 @@ public class SummaryReport {
 }
 ```
 
-## 4. Cuidados de Design
+## Cuidados de Design
 
 Embora anotações agregadoras sejam muito convenientes, vale reforçar as boas
 práticas:

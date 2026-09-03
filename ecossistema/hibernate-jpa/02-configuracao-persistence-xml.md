@@ -10,7 +10,7 @@ um arquivo de configuração padronizado: o **`persistence.xml`**.
 Neste capítulo, aprenderemos onde posicionar esse arquivo, sua estrutura e as
 principais propriedades de configuração.
 
-## 1. Localização Obrigatória do Arquivo
+## Localização Obrigatória do Arquivo
 
 A especificação JPA exige que o arquivo de configuração esteja localizado
 estritamente no diretório **`META-INF/`** dentro da pasta de recursos do Maven
@@ -35,7 +35,7 @@ meu-projeto/
 > estiver incorreto, a JPA não conseguirá inicializar e lançará erro de unidade
 > de persistência não encontrada.
 
-## 2. Anatomia do `persistence.xml`
+## Anatomia do `persistence.xml`
 
 Um arquivo `persistence.xml` típico para SQLite com Hibernate possui a seguinte
 estrutura:
@@ -75,7 +75,7 @@ estrutura:
 </persistence>
 ```
 
-## 3. Detalhamento dos Elementos
+## Detalhamento dos Elementos
 
 ### 1. Unidade de Persistência (`<persistence-unit>`)
 
@@ -98,7 +98,7 @@ utilizamos `org.hibernate.jpa.HibernatePersistenceProvider`.
 - **`jdbc.driver`:** Classe do driver (`org.sqlite.JDBC`).
 - **`jdbc.url`:** URL de conexão do banco (`jdbc:sqlite:loja_jpa.db`).
 
-## 4. Propriedades Especiais do Hibernate
+## Propriedades Especiais do Hibernate
 
 ### Geração Automática de Tabelas (`hibernate.hbm2ddl.auto`)
 

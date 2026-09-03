@@ -11,7 +11,7 @@ Neste capítulo, entenderemos o ciclo de vida do `EntityManager`, como controlar
 transações e como realizar as quatro operações básicas do CRUD (Criar, Buscar,
 Atualizar e Remover).
 
-## 1. `EntityManagerFactory` vs `EntityManager`
+## `EntityManagerFactory` vs `EntityManager`
 
 O acesso a dados na JPA é dividido em dois componentes fundamentais:
 
@@ -49,7 +49,7 @@ graph TD
 
 ---
 
-## 2. Transações no JPA (`EntityTransaction`)
+## Transações no JPA (`EntityTransaction`)
 
 Assim como no JDBC, qualquer operação de escrita (`persist`, `merge`, `remove`)
 no JPA **exige obrigatoriamente uma transação ativa**:
@@ -75,7 +75,7 @@ try {
 
 ---
 
-## 3. Operações CRUD na Prática
+## Operações CRUD na Prática
 
 ### 1. Create (Salvar um Novo Registro)
 
@@ -184,7 +184,7 @@ em.close();
 
 ---
 
-## 4. Exemplo Completo Integrado
+## Exemplo Completo Integrado
 
 Veja uma demonstração completa executando todas as operações do CRUD em
 sequência:

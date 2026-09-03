@@ -15,7 +15,7 @@ paradigma funcional, pois representam um conceito altamente abstrato. Por isso,
 antes de escrever código, vamos construir uma **intuição visual e prática** do
 que é uma Stream.
 
-## 1. O Que É uma Stream?
+## O Que É uma Stream?
 
 Para entender o que é uma Stream, a melhor abordagem é compará-la com o que você
 já conhece muito bem: as **Coleções** (`List`, `Set`, `Map`).
@@ -67,7 +67,7 @@ graph LR
 | **Reutilização**   | Pode ser percorrida quantas vezes você quiser.                                   | **Consumida uma única vez:** após chegar ao fim da esteira, a Stream é fechada.            |
 | **Avaliação**      | **Estrita (_Eager_):** todos os elementos já existem e estão prontos na memória. | **Preguiçosa (_Lazy_):** o processamento só acontece quando o resultado final for exigido. |
 
-## 2. A Anatomia do Pipeline de Streams
+## A Anatomia do Pipeline de Streams
 
 Todo processamento com Streams em Java é estruturado como um **pipeline** (duto
 de operações) composto por três etapas obrigatórias:
@@ -97,7 +97,7 @@ graph LR
    produzindo um resultado final (uma nova `List`, um número somado, um valor
    booleano ou um efeito colateral).
 
-## 3. Avaliação Preguiçosa (_Lazy Evaluation_) na Prática
+## Avaliação Preguiçosa (_Lazy Evaluation_) na Prática
 
 Uma das maiores vantagens da Streams API é que as operações intermediárias são
 **preguiçosas** (_lazy_).
@@ -196,7 +196,7 @@ ele já avança **imediatamente** para o `map`, antes mesmo de `"Carlos"` ou
 Cada elemento percorre o pipeline de ponta a ponta em uma **única passagem**,
 economizando memória e ciclos de CPU.
 
-## 4. Operações Intermediárias Essenciais
+## Operações Intermediárias Essenciais
 
 As operações intermediárias retornam um novo `Stream<T>`, permitindo encadear
 múltiplas etapas de processamento:
@@ -283,7 +283,7 @@ List<BankAccount> allAccounts = clients.stream()
 
 ---
 
-## 5. O Poder do Encadeamento: Construindo Pipelines Reais
+## O Poder do Encadeamento: Construindo Pipelines Reais
 
 O verdadeiro poder das Streams se revela quando combinamos várias operações
 intermediárias em uma sequência fluente e declarativa.

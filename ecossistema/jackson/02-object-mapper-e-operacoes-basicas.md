@@ -11,7 +11,7 @@ desenvolvimento:
 - **Desserialização:** Converter um texto ou arquivo JSON de volta para um
   objeto Java (_JSON $\rightarrow$ Object_).
 
-## 1. O Coração da Biblioteca: `ObjectMapper`
+## O Coração da Biblioteca: `ObjectMapper`
 
 A classe **`ObjectMapper`** é o motor central do Jackson. Ela é responsável por
 inspecionar as classes Java, ler a estrutura do JSON e realizar a conversão
@@ -36,7 +36,7 @@ public class Main {
 > (_thread-safe_)**, a melhor prática é **criar uma única instância
 > reutilizável** em toda a aplicação (como uma constante `static final`).
 
-## 2. Serialização: Transformando Objetos em JSON
+## Serialização: Transformando Objetos em JSON
 
 Para exemplificar, vamos utilizar uma classe Java simples representando um
 produto:
@@ -119,7 +119,7 @@ import java.io.File;
 mapper.writerWithDefaultPrettyPrinter().writeValue(new File("produto.json"), prod);
 ```
 
-## 3. Desserialização: Transformando JSON em Objetos
+## Desserialização: Transformando JSON em Objetos
 
 A desserialização é o processo inverso: receber um texto ou arquivo JSON e
 reconstruir a instância do objeto Java correspondente.
@@ -169,7 +169,7 @@ Product prod = mapper.readValue(new File("produto.json"), Product.class);
 > 2. De métodos **setters** ou atributos acessíveis para conseguir preencher os
 >    dados lidos.
 
-## 4. Desserializando Listas e Coleções (`TypeReference`)
+## Desserializando Listas e Coleções (`TypeReference`)
 
 Quando precisamos desserializar uma lista de objetos (um array JSON `[ { ... },
 { ... } ]`), nos deparamos com uma limitação do Java chamada **_Type Erasure_**

@@ -11,7 +11,7 @@ pelo compilador: variáveis, parâmetros e retornos de métodos.
 Como o Java resolveu o desafio de representar uma "função" sem quebrar seu
 sistema de tipos? A resposta está nas **Interfaces Funcionais**.
 
-## 1. O Que É uma Interface Funcional?
+## O Que É uma Interface Funcional?
 
 Uma **Interface Funcional** é qualquer interface Java que possui **exatamente um
 único método abstrato**.
@@ -57,7 +57,7 @@ SAM**:
 > métodos `static` forem necessários. O que importa para a regra SAM é existir
 > **apenas um método puramente abstrato** (sem corpo).
 
-## 2. A Abordagem Clássica: Classes Anônimas
+## A Abordagem Clássica: Classes Anônimas
 
 Antes do Java 8, se você quisesse passar uma implementação de uma interface
 funcional para um método, você tinha duas opções:
@@ -128,7 +128,7 @@ No entanto, para escrever essa única linha útil, fomos obrigados a digitar:
 Esse excesso de "cerimônia" sintática obscurece a intenção do código e torna a
 leitura cansativa.
 
-## 3. O Catálogo Padrão: Pacote `java.util.function`
+## O Catálogo Padrão: Pacote `java.util.function`
 
 Percebendo que programadores do mundo inteiro passavam o dia criando interfaces
 como `AccountFilter`, `StringTransformer`, `NumberValidator`, os criadores do

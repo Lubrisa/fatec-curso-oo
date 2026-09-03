@@ -11,7 +11,7 @@ tornará difícil de manter, testar e evoluir.
 Neste capítulo, aprenderemos como organizar a camada de persistência de forma
 profissional utilizando o **Padrão DAO** (_Data Access Object_).
 
-## 1. O que é o Padrão DAO?
+## O que é o Padrão DAO?
 
 O **DAO** é um padrão de arquitetura que tem como objetivo central **isolar
 completamente o acesso ao banco de dados** do restante da aplicação.
@@ -36,7 +36,7 @@ graph LR
   regra de negócio permanecerá intacta, bastando criar uma nova implementação da
   interface DAO.
 
-## 2. Anatomia dos Componentes
+## Anatomia dos Componentes
 
 Para aplicar o padrão DAO de forma limpa, dividimos o código em quatro
 componentes bem definidos:
@@ -50,7 +50,7 @@ componentes bem definidos:
 4. **Implementação DAO (`ProductDaoSqlite`):** A classe que contém o código JDBC
    real (`PreparedStatement`, `ResultSet` e SQL).
 
-## 3. Implementação Passo a Passo
+## Implementação Passo a Passo
 
 ### Passo 1: A Entidade de Domínio (`Product`)
 
@@ -278,7 +278,7 @@ public class ProductDaoSqlite implements ProductDao {
 }
 ```
 
-## 4. Utilizando o DAO na Aplicação
+## Utilizando o DAO na Aplicação
 
 Veja como a camada de aplicação consome o DAO de forma elegante, sem precisar
 escrever nenhuma instrução SQL:

@@ -14,7 +14,7 @@ Language_), uma linguagem de consulta poderosa e orientada a objetos.
 Neste capítulo, aprenderemos a sintaxe do JPQL, consultas com parâmetros seguros
 e veremos uma comparação final entre o JDBC e a JPA/Hibernate.
 
-## 1. O que é JPQL?
+## O que é JPQL?
 
 A **JPQL** é a linguagem de consulta padronizada da JPA.
 
@@ -34,7 +34,7 @@ graph LR
     HIB --> SQL["<b>SQL Nativo do Banco</b><br/><i>SELECT * FROM products WHERE price > 100.0</i>"]
 ```
 
-## 2. Consultando Todos os Registros
+## Consultando Todos os Registros
 
 Para listar todas as instâncias de uma entidade, utilizamos o comando `SELECT
 apelido FROM NomeDaClasse apelido`:
@@ -70,7 +70,7 @@ public class JpqlFindAllDemo {
 > `tb_products` (o nome da tabela no banco). O JPQL é _case-sensitive_ para os
 > nomes de classes e atributos.
 
-## 3. Consultas com Filtros e Parâmetros Nomeados
+## Consultas com Filtros e Parâmetros Nomeados
 
 Assim como no JDBC, **nunca devemos concatenar strings em consultas JPQL** para
 evitar vulnerabilidades de injeção.
@@ -103,7 +103,7 @@ for (Product p : resultados) {
 em.close();
 ```
 
-## 4. Busca por Texto Parcial (`LIKE`)
+## Busca por Texto Parcial (`LIKE`)
 
 Para buscas aproximadas por nome ou descrição, combinamos o operador `LIKE` com
 o parâmetro nomeado:
@@ -118,7 +118,7 @@ query.setParameter("termo", "%" + termo + "%");
 List<Product> produtos = query.getResultList();
 ```
 
-## 5. Consultas de Agregação (COUNT, AVG, SUM)
+## Consultas de Agregação (COUNT, AVG, SUM)
 
 O JPQL suporta funções de agregação diretamente sobre os atributos das
 entidades:
@@ -139,7 +139,7 @@ System.out.println("Preço médio: R$ " + precoMedio);
 em.close();
 ```
 
-## 6. Comparativo Final: JDBC Puro vs Hibernate / JPA
+## Comparativo Final: JDBC Puro vs Hibernate / JPA
 
 Agora que você conhece tanto o JDBC tradicional quanto o Hibernate com JPA, veja
 quando cada abordagem se destaca:

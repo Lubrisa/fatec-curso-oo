@@ -10,7 +10,7 @@ mapeamento** da especificação JPA (localizadas no pacote
 Neste capítulo, aprenderemos as principais anotações para mapear entidades,
 chaves primárias, colunas, enums e atributos transitórios.
 
-## 1. A Anotação `@Entity` e o Construtor sem Argumentos
+## A Anotação `@Entity` e o Construtor sem Argumentos
 
 A anotação **`@Entity`** marca uma classe Java comum como uma **Entidade JPA**,
 indicando que instâncias dessa classe terão seu ciclo de vida e estado
@@ -57,7 +57,7 @@ public class Product {
 }
 ```
 
-## 2. Mapeando a Tabela com `@Table`
+## Mapeando a Tabela com `@Table`
 
 Por padrão, a JPA assume que o nome da tabela no banco de dados é idêntico ao
 nome da classe Java (ex: classe `Product` mapeia para tabela `Product`).
@@ -76,7 +76,7 @@ public class Product {
 }
 ```
 
-## 3. Identificador e Chave Primária
+## Identificador e Chave Primária
 
 Toda entidade JPA **deve obrigatoriamente possuir uma chave primária**, marcada
 com a anotação **`@Id`**.
@@ -187,7 +187,7 @@ Quando a chave primária de uma tabela é composta por **dois ou mais campos**
    }
    ```
 
-## 4. Customizando Colunas com `@Column`
+## Customizando Colunas com `@Column`
 
 Se nenhum ajuste for necessário, os atributos da classe serão mapeados
 automaticamente para colunas com o mesmo nome.
@@ -213,7 +213,7 @@ private Double price;
   `255`).
 - **`unique = true`:** Adiciona uma restrição de unicidade (`UNIQUE`) na coluna.
 
-## 5. Ignorando Atributos com `@Transient`
+## Ignorando Atributos com `@Transient`
 
 Se a sua classe possuir algum atributo auxiliar em memória ou calculado (como um
 dado de sessão ou status temporário) que **não deve ser salvo no banco de
@@ -226,7 +226,7 @@ import jakarta.persistence.Transient;
 private String tempToken; // O Hibernate ignorará este campo completamente
 ```
 
-## 6. Mapeando Enumerações com `@Enumerated`
+## Mapeando Enumerações com `@Enumerated`
 
 Ao salvar um `enum` do Java no banco de dados, o comportamento padrão da JPA é
 persistir a posição ordinal do enum (`0, 1, 2...`).
@@ -256,7 +256,7 @@ public enum ProductStatus {
 private ProductStatus status = ProductStatus.ACTIVE;
 ```
 
-## 7. Exemplo Completo da Entidade Mapeada
+## Exemplo Completo da Entidade Mapeada
 
 Veja como fica a classe `Product` completa e pronta para produção:
 

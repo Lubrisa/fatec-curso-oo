@@ -12,7 +12,7 @@ mecânicas.
 Para resolver esse problema e tornar o desenvolvimento mais limpo e produtivo,
 utilizamos o **Project Lombok**.
 
-## 1. O Problema do Código Repetitivo
+## O Problema do Código Repetitivo
 
 Observe uma classe simples para representar um cliente com apenas 4 atributos:
 
@@ -42,7 +42,7 @@ pela IDE, mas sim a **manutenção**:
 - A leitura da classe fica poluída: o que realmente importa (os dados) fica
   escondido em meio a um mar de métodos repetitivos.
 
-## 2. O Que É o Project Lombok e Como Ele Funciona?
+## O Que É o Project Lombok e Como Ele Funciona?
 
 O **Project Lombok** é uma biblioteca que gera automaticamente esses métodos
 durante a compilação do projeto, utilizando **Anotações** (como `@Getter`,
@@ -72,7 +72,7 @@ O segredo do Lombok está no mecanismo chamado **Processamento de Anotações**
 > conceito completo de criação e uso de anotações é abordado no módulo de Java
 > Moderno.
 
-## 3. Configuração Prática (Setup)
+## Configuração Prática (Setup)
 
 Para utilizar o Lombok no seu projeto Maven, precisamos de duas etapas simples:
 declarar a biblioteca no `pom.xml` e garantir que sua IDE esteja com o suporte

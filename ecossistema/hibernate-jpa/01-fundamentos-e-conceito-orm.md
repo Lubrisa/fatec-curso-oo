@@ -17,7 +17,7 @@ Neste capítulo, entenderemos o que é o **descompasso objeto-relacional**, o
 conceito de **ORM** (_Object-Relational Mapping_) e a relação entre a
 especificação **JPA** e a biblioteca **Hibernate**.
 
-## 1. O Descompasso Objeto-Relacional
+## O Descompasso Objeto-Relacional
 
 Quando desenvolvemos em Java e utilizamos bancos de dados relacionais (como
 SQLite, PostgreSQL ou MySQL), lidamos com dois paradigmas com filosofias
@@ -46,7 +46,7 @@ manualmente:
 - Ler cada coluna do `ResultSet` com `rs.getString()`, `rs.getDouble()` para
   reconstruir os objetos Java em memória.
 
-## 2. O que é ORM (_Object-Relational Mapping_)?
+## O que é ORM (_Object-Relational Mapping_)?
 
 O **ORM** (_Mapeamento Objeto-Relacional_) é uma técnica e categoria de
 ferramentas criada para automatizar a tradução entre objetos e tabelas do banco
@@ -61,7 +61,7 @@ Com um framework ORM:
 3. Você salva, busca e atualiza dados manipulando diretamente os objetos Java,
    sem precisar escrever SQL manual para as operações do dia a dia.
 
-## 3. JPA vs Hibernate: Qual é a Diferença?
+## JPA vs Hibernate: Qual é a Diferença?
 
 É muito comum encontrar desenvolvedores iniciantes confusos sobre os papéis do
 **JPA** e do **Hibernate**. A distinção é simples e análoga a **Interfaces vs
@@ -96,7 +96,7 @@ graph TD
 > concreta `ArrayList`. Seu código é programado contra as interfaces da JPA, e o
 > Hibernate trabalha nos bastidores fazendo as coisas acontecerem.
 
-## 4. Setup do Hibernate no `pom.xml`
+## Setup do Hibernate no `pom.xml`
 
 Para utilizar o Hibernate com JPA em nosso projeto Maven, adicionamos a
 dependência do **`hibernate-core`** e o driver JDBC do nosso banco de dados

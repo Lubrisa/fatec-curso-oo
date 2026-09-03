@@ -11,7 +11,7 @@ pode ficar em um estado corrompido ou inconsistente.
 Neste capítulo, entenderemos o perigo da falta de atomicidade e como controlar
 **Transações** no JDBC para garantir integridade total aos dados.
 
-## 1. O Problema da Falta de Atomicidade
+## O Problema da Falta de Atomicidade
 
 Por padrão, toda conexão JDBC opera em modo **_auto-commit_**. Isso significa
 que cada comando `executeUpdate()` executado é gravado imediatamente e de forma
@@ -61,7 +61,7 @@ O dinheiro foi debitado da conta de Alice, mas **nunca chegou à conta de Bob**.
 Os R$ 500,00 simplesmente sumiram do sistema, e o banco de dados ficou em um
 **estado inconsistente**.
 
-## 2. O Conceito de Transação e Atomicidade
+## O Conceito de Transação e Atomicidade
 
 Uma **Transação** é um agrupamento de uma ou mais operações de banco de dados
 que devem ser tratadas como uma **única unidade lógica de trabalho**.
@@ -77,7 +77,7 @@ bancos de dados):
 Se qualquer erro acontecer durante o processo, o banco de dados desfaz tudo o
 que já havia sido executado, voltando exatamente ao estado inicial.
 
-## 3. Gerenciamento de Transações no JDBC
+## Gerenciamento de Transações no JDBC
 
 Para assumir o controle manual das transações no JDBC, seguimos quatro passos:
 
@@ -105,7 +105,7 @@ Para assumir o controle manual das transações no JDBC, seguimos quatro passos:
    conn.rollback();
    ```
 
-## 4. Exemplo Completo e Seguro
+## Exemplo Completo e Seguro
 
 Veja como implementar a transferência bancária protegida por transação:
 

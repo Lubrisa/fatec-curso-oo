@@ -15,7 +15,7 @@ exatamente com as chaves do JSON. No entanto, no mundo real:
 Para personalizar e ter controle total sobre como os dados são convertidos, o
 Jackson disponibiliza um conjunto poderoso de anotações.
 
-## 1. Mapeando Chaves Diferentes (`@JsonProperty`)
+## Mapeando Chaves Diferentes (`@JsonProperty`)
 
 Em Java, a convenção padrão para nomes de variáveis e métodos é o
 **_camelCase_** (ex: `clientName`, `taxId`). Em muitas APIs REST e bancos de
@@ -58,7 +58,7 @@ O `@JsonProperty` funciona **bidirecionalmente**:
 - **Na Desserialização:** O Jackson lê a chave `"full_name"` do JSON e preenche
   corretamente o atributo `name` do Java.
 
-## 2. Ocultando Dados Sensíveis (`@JsonIgnore`)
+## Ocultando Dados Sensíveis (`@JsonIgnore`)
 
 Por motivos críticos de segurança e privacidade, dados sigilosos (como senhas,
 códigos de segurança ou tokens de acesso) **jamais devem ser expostos** em
@@ -94,7 +94,7 @@ System.out.println(json);
 // Observe que o campo 'password' foi omitido com segurança!
 ```
 
-## 3. Omitindo Campos Nulos (`@JsonInclude`)
+## Omitindo Campos Nulos (`@JsonInclude`)
 
 Por padrão, quando um atributo do objeto tem valor `null`, o Jackson inclui a
 chave com o valor `null` no JSON (ex: `"phone": null`).
@@ -137,7 +137,7 @@ System.out.println(json);
 > Sempre verifique os requisitos do contrato da API antes de aplicar
 > `@JsonInclude`.
 
-## 4. Tolerando Propriedades Desconhecidas
+## Tolerando Propriedades Desconhecidas
 
 Por padrão, se o Jackson tentar desserializar um JSON que contém uma chave que
 **não existe** na sua classe Java, ele lançará a exceção

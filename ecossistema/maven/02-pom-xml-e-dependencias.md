@@ -8,7 +8,7 @@ O `pom.xml` (_Project Object Model_) é o arquivo descritor onde declaramos a
 identidade do projeto, as versões do Java utilizadas e todas as bibliotecas
 externas que nossa aplicação precisa para funcionar.
 
-## 1. As Coordenadas Universais (GAV)
+## As Coordenadas Universais (GAV)
 
 Todo projeto e toda biblioteca no ecossistema Maven possuem uma identidade única
 universal conhecida pela sigla **GAV** (**G**roupId, **A**rtifactId,
@@ -39,7 +39,7 @@ universal conhecida pela sigla **GAV** (**G**roupId, **A**rtifactId,
    - O sufixo **`-SNAPSHOT`** indica que o projeto está em **fase de
      desenvolvimento ativo** (ainda não é uma versão final estável de produção).
 
-## 2. Configurações Essenciais em `<properties>`
+## Configurações Essenciais em `<properties>`
 
 Dentro da tag `<properties>`, definimos variáveis de configuração para garantir
 que o código seja compilado de forma consistente em qualquer ambiente:
@@ -61,7 +61,7 @@ que o código seja compilado de forma consistente em qualquer ambiente:
   escrita de arquivos, impedindo erros ao compilar código em sistemas
   operacionais diferentes (como Windows e Linux).
 
-## 3. O Ecossistema de Repositórios
+## O Ecossistema de Repositórios
 
 Quando você adiciona uma dependência no `pom.xml`, de onde o Maven baixa os
 arquivos?
@@ -99,7 +99,7 @@ seu `pom.xml`**.
 O Maven analisa a árvore de dependências e baixa automaticamente todas as
 **dependências transitivas** necessárias com as versões compatíveis.
 
-## 4. Adicionando Dependências na Prática
+## Adicionando Dependências na Prática
 
 Para incluir uma biblioteca externa no projeto, adicionamos a tag
 `<dependencies>` contendo um ou mais blocos `<dependency>`.
@@ -138,7 +138,7 @@ coordenadas GAV fornecidas pelo [MVN Repository](https://mvnrepository.com/):
 Assim que você salva o `pom.xml`, a IDE ou o Maven sincroniza o projeto e baixa
 automaticamente os arquivos `.jar` para o seu ambiente.
 
-## 5. Escopos de Dependência (`<scope>`)
+## Escopos de Dependência (`<scope>`)
 
 A tag opcional `<scope>` define em quais momentos do ciclo de desenvolvimento a
 biblioteca estará visível:

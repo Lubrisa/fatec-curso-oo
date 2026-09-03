@@ -10,7 +10,7 @@ sem ruídos, precisamos de um formato de intercâmbio de dados universal.
 
 Esse formato é o **JSON** (_JavaScript Object Notation_).
 
-## 1. O que é JSON?
+## O que é JSON?
 
 O **JSON** é um padrão aberto de texto estruturado, leve e de fácil leitura
 tanto para seres humanos quanto para computadores. Embora tenha se originado na
@@ -55,7 +55,7 @@ Dentro de um JSON, os valores podem ser:
 }
 ```
 
-## 2. O que é o Project Jackson?
+## O que é o Project Jackson?
 
 Em Java, manipular strings puras de JSON na mão (concatenando textos ou buscando
 substrings) seria extremamente trabalhoso, frágil e sujeito a erros de sintaxe e
@@ -80,7 +80,7 @@ O Jackson é dividido em três camadas modulares:
 Ao declarar o `jackson-databind` no Maven, ele traz automaticamente os outros
 dois módulos como dependências transitivas.
 
-## 3. Configurando o Jackson no `pom.xml`
+## Configurando o Jackson no `pom.xml`
 
 Para utilizar o Jackson em um projeto gerenciado pelo Maven, basta adicionar a
 dependência **`jackson-databind`** no seu arquivo `pom.xml`:

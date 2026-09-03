@@ -10,7 +10,7 @@ utilizamos os **bancos de dados** (como SQLite, PostgreSQL e MySQL).
 Neste capítulo, aprenderemos o que é a especificação **JDBC** e como configurar
 um banco de dados **SQLite** em nosso projeto Java.
 
-## 1. O que é JDBC?
+## O que é JDBC?
 
 O **JDBC** (_Java Database Connectivity_) é a API padrão da linguagem Java
 (localizada no pacote `java.sql`) para conexão e execução de operações em bancos
@@ -38,7 +38,7 @@ Isso significa que o mesmo código Java que conecta e executa SQL no SQLite pode
 ser reaproveitado no PostgreSQL ou Oracle apenas trocando o driver e a URL de
 conexão!
 
-## 2. Por que usar o SQLite no Aprendizado?
+## Por que usar o SQLite no Aprendizado?
 
 Para quem está aprendendo a integrar bancos de dados com Java, o **SQLite** é a
 escolha ideal:
@@ -52,7 +52,7 @@ escolha ideal:
 - **Conformidade SQL:** Suporta SQL padrão, chaves primárias, chaves
   estrangeiras e transações ACID completas.
 
-## 3. Configurando o Driver SQLite no `pom.xml`
+## Configurando o Driver SQLite no `pom.xml`
 
 Para utilizar o SQLite em nosso projeto Maven, adicionamos o driver
 **`sqlite-jdbc`** no arquivo `pom.xml`:
@@ -71,7 +71,7 @@ Para utilizar o SQLite em nosso projeto Maven, adicionamos o driver
 Após salvar o arquivo e aguardar o Maven baixar as dependências, o driver estará
 disponível no seu projeto.
 
-## 4. Estabelecendo a Primeira Conexão
+## Estabelecendo a Primeira Conexão
 
 Para abrir uma conexão com o banco de dados, utilizamos a classe `DriverManager`
 e informamos a **URL de Conexão JDBC**:
@@ -112,7 +112,7 @@ public class DatabaseConnectionDemo {
 > Se o arquivo `meubanco.db` ainda não existir na raiz do seu projeto, o driver
 > do SQLite o criará automaticamente na primeira conexão bem-sucedida.
 
-## 5. Fechamento Seguro com _try-with-resources_
+## Fechamento Seguro com _try-with-resources_
 
 Abrir uma conexão com um banco de dados aloca recursos preciosos no sistema
 operacional (como arquivos abertos e memória). Esquecer de fechar uma conexão

@@ -13,7 +13,7 @@ mais graves e conhecidas da computação: o **SQL Injection**.
 Neste capítulo, entenderemos como esse ataque funciona na prática e como a
 interface **`PreparedStatement`** do JDBC nos protege de forma definitiva.
 
-## 1. O Perigo do SQL Injection
+## O Perigo do SQL Injection
 
 O ataque de **SQL Injection** ocorre quando dados fornecidos por um usuário são
 concatenados diretamente no texto do comando SQL, permitindo que um invasor
@@ -62,7 +62,7 @@ saiba a senha correta!
 Em casos ainda mais graves, um invasor pode injetar comandos como `'; DROP TABLE
 users; --`, destruindo tabelas inteiras da aplicação.
 
-## 2. A Solução Definitiva: `PreparedStatement`
+## A Solução Definitiva: `PreparedStatement`
 
 A interface **`PreparedStatement`** (do pacote `java.sql`) foi projetada
 especificamente para eliminar o risco de SQL Injection.
@@ -89,7 +89,7 @@ String sql = """
    espaços ou comandos como `DROP TABLE`, o banco interpretará tudo apenas como
    uma cadeia de caracteres comum.
 
-## 3. Passagem Tipada de Parâmetros
+## Passagem Tipada de Parâmetros
 
 Para preencher os marcadores `?`, utilizamos métodos específicos do
 `PreparedStatement` de acordo com o tipo de dado.
@@ -109,7 +109,7 @@ Para preencher os marcadores `?`, utilizamos métodos específicos do
 | **`setDouble(int index, double value)`** | `Double`, `double` | `stmt.setDouble(3, 199.90);`               |
 | **`setNull(int index, int sqlType)`**    | `null`             | `stmt.setNull(4, java.sql.Types.VARCHAR);` |
 
-## 4. Exemplo Prático Seguro
+## Exemplo Prático Seguro
 
 Veja como a consulta de autenticação fica 100% protegida com o
 `PreparedStatement`:
@@ -160,7 +160,7 @@ Ao executar o código acima, o banco procurará um usuário cujo e-mail seja
 **literalmente** `"admin@email.com' OR '1'='1"`, o que não encontrará nenhum
 registro e frustrará a tentativa de ataque com total segurança.
 
-## 5. Vantagem Extra: Desempenho e Reuso
+## Vantagem Extra: Desempenho e Reuso
 
 Além da segurança, o `PreparedStatement` oferece ganhos de desempenho. Como a
 consulta é pré-compilada pelo banco de dados, você pode reutilizar a mesma

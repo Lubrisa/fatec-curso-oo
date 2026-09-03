@@ -11,7 +11,7 @@ cinco ou seis linhas de cerimônia sintática.
 Com o lançamento do Java 8, esse problema foi resolvido de forma definitiva com
 a chegada das **Expressões Lambda** e dos **Method References**.
 
-## 1. O Que É uma Expressão Lambda?
+## O Que É uma Expressão Lambda?
 
 Uma **Expressão Lambda** é uma função anônima — isto é, um bloco de código
 conciso que representa diretamente a lógica de uma [Interface
@@ -61,7 +61,7 @@ Predicate<BankAccount> activeFilter = (BankAccount account) -> {
 Predicate<BankAccount> activeFilter = account -> account.isActive();
 ```
 
-## 2. Variações Sintáticas das Lambdas
+## Variações Sintáticas das Lambdas
 
 A sintaxe das lambdas no Java é flexível e se adapta à complexidade da operação:
 
@@ -116,7 +116,7 @@ Supplier<BankAccount> factory = () -> new BankAccount("Titular", "001", 0.0);
 
 ---
 
-## 3. Como o Compilador Sabe o Tipo? (_Target Typing_)
+## Como o Compilador Sabe o Tipo? (_Target Typing_)
 
 Você deve ter notado que não declaramos o tipo de `account` em `account ->
 account.isActive()`. Como o compilador sabe que `account` é uma `BankAccount`?
@@ -132,7 +132,7 @@ passada como parâmetro:
 BankService.filterAccounts(accounts, account -> account.isActive());
 ```
 
-## 4. Captura de Variáveis e _Effectively Final_
+## Captura de Variáveis e _Effectively Final_
 
 Uma expressão lambda pode acessar variáveis locais declaradas fora dela (no
 método ao redor). No entanto, existe uma regra fundamental:
@@ -176,7 +176,7 @@ Se você precisa acumular valores ou contar elementos, o caminho idiomático no
 Java funcional não é mutar variáveis externas, mas sim usar operações de
 agregação da **Streams API** que estudaremos em breve.
 
-## 5. Method References (`::`)
+## Method References (`::`)
 
 Em muitas situações reais, a sua expressão lambda não faz nenhum cálculo
 adicional: ela **apenas chama um método existente**, repassando diretamente os

@@ -18,7 +18,7 @@ Para resolver esses problemas, utilizamos uma **Ferramenta de Build** (_Build
 Tool_), e no ecossistema Java o padrão mais consolidado e universal é o **Apache
 Maven**.
 
-## 1. O Mundo Sem Ferramenta de Build
+## O Mundo Sem Ferramenta de Build
 
 Para entender o valor do Maven, vale a pena observar como projetos Java eram
 construídos manualmente no passado:
@@ -37,7 +37,7 @@ construídos manualmente no passado:
 O Maven foi criado pela Apache para eliminar todo esse trabalho repetitivo e
 instituir um **padrão universal** para a comunidade Java.
 
-## 2. O Que É o Apache Maven?
+## O Que É o Apache Maven?
 
 O **Apache Maven** é uma ferramenta de automação de _build_ e gerenciamento de
 dependências para projetos Java.
@@ -61,7 +61,7 @@ cada tipo de arquivo. Se você seguir essas convenções, **não precisa configu
 quase nada**: o Maven já sabe exatamente onde encontrar o código-fonte, onde
 estão os arquivos de configuração e onde salvar os arquivos compilados.
 
-## 3. A Estrutura Padrão de Diretórios
+## A Estrutura Padrão de Diretórios
 
 Todo projeto gerenciado pelo Maven adota rigorosamente a mesma árvore de pastas:
 
@@ -94,7 +94,7 @@ meu-projeto/
 
 ---
 
-## 4. Criando um Projeto Maven na Prática
+## Criando um Projeto Maven na Prática
 
 As principais IDEs do mercado integram o Maven de forma nativa. Veja como criar
 um novo projeto passo a passo nas duas ferramentas mais utilizadas:

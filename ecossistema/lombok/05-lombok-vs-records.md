@@ -20,7 +20,7 @@ distintos.
 > Moderno. Aqui, nosso foco é comparar as diferenças práticas em relação ao
 > Lombok.
 
-## 1. Comparativo Funcionalidade por Funcionalidade
+## Comparativo Funcionalidade por Funcionalidade
 
 Para compreender as diferenças, vamos comparar lado a lado uma representação de
 cliente feita com **Record** e com uma classe tradicional usando **Lombok**.
@@ -105,7 +105,7 @@ lmb.setName("Novo Nome"); // ✅ Permitido com @Setter
   classes**, classes abstratas e polimorfismo (`public class Client extends
 Person`).
 
-## 2. Bússola de Decisão: Quando Usar Cada Um?
+## Bússola de Decisão: Quando Usar Cada Um?
 
 | Cenário / Necessidade                                     | Escolha Recomendada | Motivo Principal                                                  |
 | :-------------------------------------------------------- | :-----------------: | :---------------------------------------------------------------- |

@@ -10,7 +10,7 @@ operações fundamentais de alteração e escrita de dados no banco de dados:
 - **`UPDATE`:** Atualizar registros existentes.
 - **`DELETE`:** Remover registros.
 
-## 1. O Método `executeUpdate()`
+## O Método `executeUpdate()`
 
 Diferente das consultas de leitura, todas as operações de escrita no JDBC são
 executadas através do método **`executeUpdate()`**.
@@ -28,7 +28,7 @@ de linhas afetadas** no banco de dados pela instrução executada:
 Se o retorno for `0` em um `UPDATE` ou `DELETE`, significa que nenhum registro
 atendeu ao critério da cláusula `WHERE`.
 
-## 2. Inserindo Dados (`INSERT INTO`)
+## Inserindo Dados (`INSERT INTO`)
 
 Para inserir um novo registro na tabela, montamos o comando com marcadores `?` e
 preenchemos os valores de forma tipada:
@@ -65,7 +65,7 @@ public class InsertDemo {
 }
 ```
 
-## 3. Recuperando o ID Gerado Automaticamente
+## Recuperando o ID Gerado Automaticamente
 
 Quando criamos tabelas com chave primária autoincrementada (`INTEGER PRIMARY
 KEY`), o SQLite gera o ID sequencial automaticamente.
@@ -121,7 +121,7 @@ public class InsertWithGeneratedKeyDemo {
 }
 ```
 
-## 4. Atualizando Registros (`UPDATE`)
+## Atualizando Registros (`UPDATE`)
 
 Para atualizar os dados de um registro existente, combinamos o comando `UPDATE`
 com a cláusula `WHERE`:
@@ -167,7 +167,7 @@ public class UpdateDemo {
 
 ---
 
-## 5. Excluindo Registros (`DELETE`)
+## Excluindo Registros (`DELETE`)
 
 A exclusão é realizada com o comando `DELETE`:
 

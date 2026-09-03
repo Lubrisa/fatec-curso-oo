@@ -125,7 +125,7 @@ valor existir:
 Optional<BankAccount> optAccount = accountRepository.findById("001");
 
 // Executa a ação somente se a conta estiver presente:
-optAccount.ifPresent(acc -> System.out.println("Titular: " + acc.getHolder()));
+optAccount.ifPresent(acc -> System.out.println("Titular: " + acc.getOwner()));
 
 // Com ifPresentOrElse (Java 9+): ação se presente + ação se ausente (Runnable)
 optAccount.ifPresentOrElse(
@@ -180,8 +180,8 @@ existem três alternativas seguras:
 Retorna o valor presente ou um valor padrão pré-definido:
 
 ```java
-String holder = accountRepository.findById("999")
-    .map(BankAccount::getHolder)
+String owner = accountRepository.findById("999")
+    .map(BankAccount::getOwner)
     .orElse("Titular Desconhecido");
 ```
 
@@ -222,7 +222,7 @@ de design:
 
 ---
 
-<a href="03-expressoes-lambda-e-method-references.md">← 3. Expressões Lambda e
+<a href="03-expressoes-lambda-e-method-references.md">← Expressões Lambda e
 Method References</a>
 
-<p align="right"><a href="05-streams-fundamentos.md">Próximo: Streams API — Fundamentos e Intuição →</a></p>
+<p align="right"><a href="05-streams-fundamentos.md">Próximo: Streams API: Intuição e Fundamentos →</a></p>

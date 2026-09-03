@@ -195,6 +195,51 @@ maiúsculas únicas e mnemônicas**:
 - **`S`, `U`, `V`**: Usados como tipos adicionais quando mais de um parâmetro
   genérico é necessário (`<T, U>`).
 
+<details>
+<summary>Como a JVM lida com Generics: <i>Type Erasure</i> (Generics são uma mentira?)</summary>
+
+Talvez em algum momento você possa pensar: _como a JVM consegue diferenciar em
+memória uma `List<String>` de uma `List<BankAccount>`?_
+
+A resposta surpreendente é: **ela não diferencia!**
+
+Quando o Java 5 introduziu os Generics em 2004, já existiam bilhões de linhas de
+código Java em produção no mundo escritas no estilo antigo (Java 1.4). Para não
+quebrar nenhum sistema existente, os criadores da linguagem adotaram o mecanismo
+de **Type Erasure** (Apagamento de Tipo):
+
+1. **Em tempo de compilação (seu código):** O compilador do Java faz uma
+   checagem rigorosa de todos os tipos dentro de `< >`, garantindo que nada
+   inválido entre na coleção e impedindo você de compilar código inseguro.
+2. **Em tempo de execução (dentro da JVM):** Após validar tudo, o compilador
+   **remove (apaga)** todas as informações de tipo genérico do _bytecode_. No
+   arquivo `.class` final, `List<String>` e `List<BankAccount>` viram exatamente
+   a mesma coisa: uma lista genérica crua (`List`) que manipula `Object`, e o
+   próprio compilador insere os _casts_ necessários de forma invisível.
+
+### O que isso significa na prática?
+
+- **Generics são uma proteção para o desenvolvedor e para o compilador**, não
+  para a JVM.
+- Em tempo de execução, você não consegue perguntar para a JVM se um objeto é
+  `instanceof List<String>` (só é possível checar `instanceof List<?>`).
+- Duas instâncias com tipos genéricos diferentes pertencem exatamente à mesma
+  classe em tempo de execução:
+
+  ```java
+  List<String> textList = new ArrayList<>();
+  List<Integer> numberList = new ArrayList<>();
+
+  // Ambas compartilham a mesma classe na JVM:
+  System.out.println(textList.getClass() == numberList.getClass()); // true (ambas são ArrayList.class)
+  ```
+
+Essa decisão permitiu que o Java evoluísse mantendo compatibilidade total com
+sistemas legados, ao custo de algumas restrições sintáticas que veremos nos
+próximos capítulos (como a impossibilidade de fazer `new T()`).
+
+</details>
+
 ---
 
 <p align="right"><a href="02-classes-e-interfaces-genericas.md">Próximo: Classes e Interfaces Genéricas →</a></p>

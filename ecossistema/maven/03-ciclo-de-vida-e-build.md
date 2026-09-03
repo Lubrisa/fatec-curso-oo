@@ -92,6 +92,19 @@ mvn clean package
   compilações anteriores, compila tudo, roda todos os testes e gera o arquivo
   `.jar` na pasta `target/`.
 
+> **Dica Prática: Usando o Maven Wrapper (`mvnw` / `mvnw.cmd`)**
+>
+> Se você estiver em um computador onde o comando `mvn` não está configurado nas
+> variáveis de ambiente (`PATH`) do sistema operacional, você pode utilizar o
+> **Maven Wrapper** gerado automaticamente pelas IDEs na raiz do projeto:
+>
+> - No Windows (CMD ou PowerShell): `mvnw clean package` ou `.\mvnw clean package`
+> - No Linux ou macOS: `./mvnw clean package`
+>
+> O _wrapper_ baixa a versão exata do Maven automaticamente em segundo plano na
+> primeira execução, garantindo que o _build_ funcione sem exigir nenhuma
+> instalação manual na máquina!
+
 ## A Pasta `target/` e Executando o `.jar`
 
 Após rodar o comando `mvn package` com sucesso, o Maven cria uma nova pasta na

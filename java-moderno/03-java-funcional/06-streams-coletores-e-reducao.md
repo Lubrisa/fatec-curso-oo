@@ -88,14 +88,14 @@ As operações terminais mais comuns podem ser divididas em quatro categorias:
 
 ```java
 // Coletando em lista imutável:
-List<String> holders = accounts.stream()
-    .map(BankAccount::getHolder)
+List<String> owners = accounts.stream()
+    .map(BankAccount::getOwner)
     .toList();
 
 // Apenas consumindo para log:
 accounts.stream()
     .filter(acc -> acc.getBalance() < 0)
-    .forEach(acc -> System.out.println("Conta negativada: " + acc.getHolder()));
+    .forEach(acc -> System.out.println("Conta negativada: " + acc.getOwner()));
 ```
 
 ### 2. Contagem e Extremos (`count`, `min`, `max`)
@@ -216,13 +216,13 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 // Coletando em um HashSet:
-Set<String> uniqueHolders = accounts.stream()
-    .map(BankAccount::getHolder)
+Set<String> uniqueOwners = accounts.stream()
+    .map(BankAccount::getOwner)
     .collect(Collectors.toSet());
 
 // Coletando em uma coleção específica (TreeSet):
-Set<String> sortedHolders = accounts.stream()
-    .map(BankAccount::getHolder)
+Set<String> sortedOwners = accounts.stream()
+    .map(BankAccount::getOwner)
     .collect(Collectors.toCollection(TreeSet::new));
 ```
 
@@ -331,4 +331,4 @@ System.out.println("Máximo:     " + stats.getMax());
 
 ---
 
-<a href="05-streams-fundamentos.md">← 5. Streams API: Intuição e Fundamentos</a>
+<a href="05-streams-fundamentos.md">← Streams API: Intuição e Fundamentos</a>

@@ -94,6 +94,21 @@ Com Generics:
 > O papel principal dos Generics é **transformar erros de tempo de execução
 > (_runtime errors_) em erros de tempo de compilação (_compile-time errors_)**.
 
+```mermaid
+flowchart TD
+    subgraph Antigo["Sem Generics (Java 1.4)"]
+        direction LR
+        A1["ArrayList (guarda Object)"] --> A2["Compilador aceita qualquer tipo"] --> A3["Cast manual no código"] --> A4["💥 ClassCastException em produção!"]
+    end
+
+    subgraph Moderno["Com Generics (Java moderno)"]
+        direction LR
+        B1["List&lt;String&gt; (tipo parametrizado)"] --> B2["Compilador valida cada inserção"] --> B3["Sem necessidade de cast"] --> B4["✅ Erro barrado na compilação!"]
+    end
+
+    Antigo ~~~ Moderno
+```
+
 ## O Operador Diamante (`<>`)
 
 No Java 5 e 6, era necessário repetir o tipo genérico nos dois lados da

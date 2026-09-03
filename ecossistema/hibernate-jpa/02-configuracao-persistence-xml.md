@@ -124,7 +124,6 @@ No próximo capítulo, aprenderemos a mapear nossas classes de domínio com as
 
 ---
 
-<a href="01-fundamentos-e-conceito-orm.md">← 1. Fundamentos e Conceito de
-ORM</a>
+<a href="01-fundamentos-e-conceito-orm.md">← Fundamentos de JPA, Hibernate e Conceito ORM</a>
 
-<p align="right"><a href="03-mapeamento-de-entidades.md">Próximo: Mapeamento de Entidades com Anotações →</a></p>
+<p align="right"><a href="03-mapeamento-de-entidades.md">Próximo: Mapeamento de Entidades e Anotações →</a></p>

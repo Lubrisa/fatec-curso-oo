@@ -153,6 +153,6 @@ práticas:
 
 ---
 
-<a href="03-construtores-automaticos.md">← 3. Construtores Automáticos</a>
+<a href="03-construtores-automaticos.md">← Construtores Automáticos</a>
 
-<p align="right"><a href="05-lombok-vs-records.md">Próximo: Lombok vs Records →</a></p>
+<p align="right"><a href="05-lombok-vs-records.md">Próximo: Lombok vs Java Records: Quando Usar Cada Um? →</a></p>

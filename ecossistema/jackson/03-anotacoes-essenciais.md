@@ -185,5 +185,4 @@ mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 ---
 
-<a href="02-object-mapper-e-operacoes-basicas.md">← 2. ObjectMapper e Operações
-Básicas</a>
+<a href="02-object-mapper-e-operacoes-basicas.md">← ObjectMapper e Operações Básicas</a>

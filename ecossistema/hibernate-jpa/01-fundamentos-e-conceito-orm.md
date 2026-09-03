@@ -131,4 +131,4 @@ No próximo capítulo, aprenderemos a configurar o arquivo central da JPA, o
 
 ---
 
-<p align="right"><a href="02-configuracao-persistence-xml.md">Próximo: Configuração com persistence.xml →</a></p>
+<p align="right"><a href="02-configuracao-persistence-xml.md">Próximo: Configuração do persistence.xml →</a></p>

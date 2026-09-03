@@ -155,5 +155,4 @@ quando cada abordagem se destaca:
 
 ---
 
-<a href="04-entity-manager-e-operacoes-crud.md">← 4. EntityManager e Operações
-CRUD</a>
+<a href="04-entity-manager-e-operacoes-crud.md">← EntityManager e Operações CRUD</a>

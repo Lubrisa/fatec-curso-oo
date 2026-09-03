@@ -253,7 +253,6 @@ Language_).
 
 ---
 
-<a href="03-mapeamento-de-entidades.md">← 3. Mapeamento de Entidades com
-Anotações</a>
+<a href="03-mapeamento-de-entidades.md">← Mapeamento de Entidades e Anotações</a>
 
-<p align="right"><a href="05-consultas-com-jpql.md">Próximo: Consultas com JPQL →</a></p>
+<p align="right"><a href="05-consultas-com-jpql.md">Próximo: Consultas Avançadas com JPQL →</a></p>

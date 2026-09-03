@@ -202,7 +202,6 @@ operações de banco de dados em uma arquitetura limpa e sustentável através d
 
 ---
 
-<a href="05-operacoes-de-leitura.md">← 5. Operações de Leitura (SELECT e
-ResultSet)</a>
+<a href="05-operacoes-de-leitura.md">← Operações de Leitura com ResultSet</a>
 
-<p align="right"><a href="07-padrao-dao.md">Próximo: O Padrão DAO (Data Access Object) →</a></p>
+<p align="right"><a href="07-padrao-dao.md">Próximo: O Padrão Data Access Object (DAO) →</a></p>

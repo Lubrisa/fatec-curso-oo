@@ -196,7 +196,6 @@ primárias geradas automaticamente pelo banco.
 
 ---
 
-<a href="02-manipulacao-de-tabelas-com-statement.md">← 2. Manipulação de Tabelas
-com Statement</a>
+<a href="02-manipulacao-de-tabelas-com-statement.md">← Manipulação de Tabelas com Statement</a>
 
 <p align="right"><a href="04-operacoes-de-escrita.md">Próximo: Operações de Escrita (INSERT, UPDATE, DELETE) →</a></p>

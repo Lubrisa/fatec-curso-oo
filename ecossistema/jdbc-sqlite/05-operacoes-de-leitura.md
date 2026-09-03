@@ -134,7 +134,6 @@ Atomicidade**.
 
 ---
 
-<a href="04-operacoes-de-escrita.md">← 4. Operações de Escrita (INSERT, UPDATE,
-DELETE)</a>
+<a href="04-operacoes-de-escrita.md">← Operações de Escrita (INSERT, UPDATE, DELETE)</a>
 
 <p align="right"><a href="06-transacoes-e-atomicidade.md">Próximo: Transações e Atomicidade →</a></p>

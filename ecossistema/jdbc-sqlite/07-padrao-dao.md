@@ -318,4 +318,4 @@ public class AppDemo {
 
 ---
 
-<a href="06-transacoes-e-atomicidade.md">← 6. Transações e Atomicidade</a>
+<a href="06-transacoes-e-atomicidade.md">← Transações e Atomicidade</a>

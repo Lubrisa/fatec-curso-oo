@@ -118,5 +118,4 @@ java -jar target/sistema-bancario-1.0.0-SNAPSHOT.jar
 
 ---
 
-<a href="02-pom-xml-e-dependencias.md">← 2. O pom.xml e Gerenciamento de
-Dependências</a>
+<a href="02-pom-xml-e-dependencias.md">← O pom.xml e Gerenciamento de Dependências</a>

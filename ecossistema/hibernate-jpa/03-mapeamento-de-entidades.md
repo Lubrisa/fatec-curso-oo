@@ -328,7 +328,6 @@ as operações de inserção, busca, atualização e exclusão com essas entidad
 
 ---
 
-<a href="02-configuracao-persistence-xml.md">← 2. Configuração com
-persistence.xml</a>
+<a href="02-configuracao-persistence-xml.md">← Configuração do persistence.xml</a>
 
 <p align="right"><a href="04-entity-manager-e-operacoes-crud.md">Próximo: EntityManager e Operações CRUD →</a></p>

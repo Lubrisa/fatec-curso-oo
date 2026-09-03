@@ -142,7 +142,8 @@ para comandos dinâmicos com dados digitados por usuários e como o
 **`PreparedStatement`** nos protege contra o perigoso ataque de **SQL
 Injection**.
 
-<a href="01-fundamentos-e-setup-sqlite.md">← 1. Fundamentos de JDBC e Setup com
-SQLite</a>
+---
+
+<a href="01-fundamentos-e-setup-sqlite.md">← Fundamentos de JDBC e Setup com SQLite</a>
 
 <p align="right"><a href="03-sql-injection-e-prepared-statement.md">Próximo: SQL Injection e PreparedStatement →</a></p>

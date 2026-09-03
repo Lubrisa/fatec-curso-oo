@@ -211,7 +211,6 @@ for (Product p : produtos) {
 
 ---
 
-<a href="01-fundamentos-e-setup.md">← 1. Fundamentos de JSON e Setup do
-Jackson</a>
+<a href="01-fundamentos-e-setup.md">← Fundamentos e Setup do Jackson</a>
 
 <p align="right"><a href="03-anotacoes-essenciais.md">Próximo: Anotações Essenciais do Jackson →</a></p>

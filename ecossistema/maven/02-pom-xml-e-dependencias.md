@@ -152,7 +152,6 @@ biblioteca estará visível:
 
 ---
 
-<a href="01-fundamentos-e-estrutura.md">← 1. Fundamentos e Estrutura de
-Projeto</a>
+<a href="01-fundamentos-e-estrutura.md">← Fundamentos e Estrutura de Projeto</a>
 
 <p align="right"><a href="03-ciclo-de-vida-e-build.md">Próximo: Ciclo de Vida e Comandos de Build →</a></p>

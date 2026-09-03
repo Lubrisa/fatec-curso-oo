@@ -192,7 +192,6 @@ Money invalid = Money.of(-50.0, "BRL"); // 💥 Lança IllegalArgumentException!
 
 ---
 
-<a href="02-anotacoes-de-acesso-e-utilidades.md">← 2. Anotações de Acesso e
-Utilidades</a>
+<a href="02-anotacoes-de-acesso-e-utilidades.md">← Anotações de Acesso e Utilidades</a>
 
 <p align="right"><a href="04-anotacoes-agregadoras-data-e-value.md">Próximo: Anotações Agregadoras: @Data e @Value →</a></p>

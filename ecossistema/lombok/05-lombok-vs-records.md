@@ -118,5 +118,4 @@ Person`).
 
 ---
 
-<a href="04-anotacoes-agregadoras-data-e-value.md">← 4. Anotações Agregadoras:
-@Data e @Value</a>
+<a href="04-anotacoes-agregadoras-data-e-value.md">← Anotações Agregadoras: @Data e @Value</a>

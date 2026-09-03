@@ -217,7 +217,6 @@ No próximo capítulo, aprenderemos como realizar **operações de leitura**
 
 ---
 
-<a href="03-sql-injection-e-prepared-statement.md">← 3. SQL Injection e
-PreparedStatement</a>
+<a href="03-sql-injection-e-prepared-statement.md">← SQL Injection e PreparedStatement</a>
 
-<p align="right"><a href="05-operacoes-de-leitura.md">Próximo: Operações de Leitura (SELECT e ResultSet) →</a></p>
+<p align="right"><a href="05-operacoes-de-leitura.md">Próximo: Operações de Leitura com ResultSet →</a></p>

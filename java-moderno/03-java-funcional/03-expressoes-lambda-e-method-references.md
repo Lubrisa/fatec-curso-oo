@@ -249,12 +249,12 @@ Supplier<List<String>> listRef = ArrayList::new;
 
 ## Tabela Resumo: Lambda vs Method Reference
 
-| Tipo                             | Com Expressão Lambda               | Com Method Reference     |
-| :------------------------------- | :--------------------------------- | :----------------------- |
-| **Método Estático**              | `x -> Math.sqrt(x)`                | `Math::sqrt`             |
-| **Método de Instância (Tipo)**   | `acc -> acc.getHolder()`           | `BankAccount::getHolder` |
-| **Método de Instância (Objeto)** | `item -> System.out.println(item)` | `System.out::println`    |
-| **Construtor**                   | `() -> new BankAccount()`          | `BankAccount::new`       |
+| Tipo                             | Com Expressão Lambda               | Com Method Reference    |
+| :------------------------------- | :--------------------------------- | :---------------------- |
+| **Método Estático**              | `x -> Math.sqrt(x)`                | `Math::sqrt`            |
+| **Método de Instância (Tipo)**   | `acc -> acc.getOwner()`            | `BankAccount::getOwner` |
+| **Método de Instância (Objeto)** | `item -> System.out.println(item)` | `System.out::println`   |
+| **Construtor**                   | `() -> new BankAccount()`          | `BankAccount::new`      |
 
 > **Dica de Aprendizado: Não se Preocupe em Decorar!**
 >
@@ -270,7 +270,7 @@ Supplier<List<String>> listRef = ArrayList::new;
 
 ---
 
-<a href="02-interfaces-funcionais-e-classes-anonimas.md">← 2. Interfaces
-Funcionais e Classes Anônimas</a>
+<a href="02-interfaces-funcionais-e-classes-anonimas.md">← Interfaces Funcionais
+e Classes Anônimas</a>
 
-<p align="right"><a href="04-optional.md">Próximo: Tratamento com Optional →</a></p>
+<p align="right"><a href="04-optional.md">Próximo: Tratamento de Ausência com Optional →</a></p>

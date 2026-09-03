@@ -74,13 +74,18 @@ O segredo do Lombok está no mecanismo chamado **Processamento de Anotações**
 
 ## Configuração Prática (Setup)
 
-Para utilizar o Lombok no seu projeto Maven, precisamos de duas etapas simples:
-declarar a biblioteca no `pom.xml` e garantir que sua IDE esteja com o suporte
+A forma mais prática e recomendada de adicionar o Lombok ao seu projeto é
+utilizando uma ferramenta de _build_ como o **Apache Maven**. Se você ainda não
+tem familiaridade com o arquivo `pom.xml` ou com a estrutura de pastas padrão,
+confira o [Submódulo de Maven](../maven/01-fundamentos-e-estrutura.md).
+
+Para utilizar o Lombok com Maven, precisamos de duas etapas simples: declarar a
+dependência no `pom.xml` e garantir que sua IDE esteja com o suporte a anotações
 habilitado.
 
 ### 1. Configuração no `pom.xml`
 
-Adicione a dependência do Lombok na versão **`1.18.48`** dentro do seu
+Adicione a dependência do Lombok na versão **`1.18.36`** dentro do seu
 `pom.xml`:
 
 ```xml
@@ -89,17 +94,18 @@ Adicione a dependência do Lombok na versão **`1.18.48`** dentro do seu
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.48</version>
+        <version>1.18.36</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
 ```
 
-> **Por que o escopo é `<scope>provided</scope>`?**  
-> Como vimos no módulo de Maven, a biblioteca do Lombok é necessária apenas
-> **durante a compilação** para gerar o bytecode dos métodos. Quando o programa
-> for executado, os métodos já estarão gravados dentro do `.class`, de modo que
-> o arquivo do Lombok não precisa ser empacotado no `.jar` final.
+> **Por que o escopo é `<scope>provided</scope>`?**
+>
+> A biblioteca do Lombok é necessária apenas **durante a compilação** para gerar
+> o bytecode dos métodos. Quando o programa for executado, os métodos já estarão
+> gravados dentro do arquivo `.class`, de modo que o `.jar` do Lombok não
+> precisa ser empacotado no executável final da aplicação.
 
 #### Configuração do Plugin de Compilação (Recomendado)
 
@@ -118,7 +124,7 @@ adicione ou atualize a seção `<build>` no seu `pom.xml`:
                     <path>
                         <groupId>org.projectlombok</groupId>
                         <artifactId>lombok</artifactId>
-                        <version>1.18.48</version>
+                        <version>1.18.36</version>
                     </path>
                 </annotationProcessorPaths>
             </configuration>

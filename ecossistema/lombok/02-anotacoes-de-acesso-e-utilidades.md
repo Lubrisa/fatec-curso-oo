@@ -115,11 +115,17 @@ public class Product {
     private Long id;
     private String name;
     private double price;
+
+    public Product(Long id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 }
 ```
 
 ```java
-Product prod = new Product();
+Product prod = new Product(1L, "Teclado Mecânico", 350.0);
 
 // Ao imprimir:
 System.out.println(prod);
@@ -136,31 +142,31 @@ Para impedir que um campo confidencial seja impresso no `toString()`, usamos a
 anotação **`@ToString.Exclude`**:
 
 ```java
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @ToString
 public class User {
-    private Long id;
+    private final Long id;
     private String username;
     private String email;
 
     @ToString.Exclude
     private String password; // 🔒 Nunca será impresso no toString()!
+
+    public User(Long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }
 ```
 
 ```java
-User user = new User();
-user.setId(10L);
-user.setUsername("luigi");
-user.setPassword("senhaUltraSecreta123");
+User user = new User(10L, "luigi", "luigi@email.com", "senhaUltraSecreta123");
 
 System.out.println(user);
-// Saída: User(id=10, username=luigi, email=null)
+// Saída: User(id=10, username=luigi, email=luigi@email.com)
 // Observe que a senha foi omitida com segurança!
 ```
 
@@ -181,7 +187,28 @@ public class Client {
     private Long id;
     private String name;
     private String email;
+
+    public Client(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 }
+```
+
+```java
+Client c1 = new Client(1L, "Ana", "ana@email.com");
+Client c2 = new Client(1L, "Ana", "ana@email.com");
+
+// Compara o conteúdo dos atributos (retorna true):
+System.out.println(c1.equals(c2)); // true
+
+// Em coleções que usam tabela hash, duplicatas são eliminadas automaticamente:
+Set<Client> clients = new HashSet<>();
+clients.add(c1);
+clients.add(c2);
+
+System.out.println(clients.size()); // 1 (apenas um cliente armazenado)
 ```
 
 ### Comparando Apenas por Campos Identificadores
@@ -198,50 +225,83 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Client {
-
     @EqualsAndHashCode.Include
     private Long id; // Apenas o 'id' será usado para comparar se dois clientes são iguais
 
     private String name;
     private String email;
+
+    public Client(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 }
+```
+
+```java
+Client c1 = new Client(1L, "Carlos Silva", "carlos.antigo@email.com");
+Client c2 = new Client(1L, "Carlos Silva", "carlos.novo@email.com");
+
+// Mesmo com e-mails diferentes, são considerados o mesmo cliente pois possuem o mesmo id:
+System.out.println(c1.equals(c2)); // true
 ```
 
 ## Comparativo: Antes vs Depois do Lombok
 
-Veja a transformação da nossa classe `User`:
+Veja a transformação da nossa classe `User`, mantendo os princípios de
+encapsulamento (identificador imutável, validações na criação e métodos de
+domínio no lugar de getters e setters ingênuos):
 
-### Antes do Lombok (~75 linhas manuais)
+### Antes do Lombok (~60 linhas manuais)
 
 ```java
 public class User {
-    private Long id;
+    private final Long id;
     private String username;
     private String email;
     private String password;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public User(Long id, String username, String email, String password) {
+        if (id == null) {
+            throw new IllegalArgumentException("O id não pode ser nulo");
+        }
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("O username não pode ser vazio");
+        }
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("O email não pode ser vazio");
+        }
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("A senha não pode ser vazia");
+        }
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getUsername() {
+        return username;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public boolean matchesCredentials(String email, String rawPassword) {
+        return this.email.equals(email) && this.password.equals(rawPassword);
+    }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username='" + username + '\'' + ", email='" + email + '\'' + '}';
+        return "User(id=%d, username='%s', email='%s')".formatted(id, username, email);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        if (!(o instanceof User user)) return false;
         return Objects.equals(id, user.id);
     }
 
@@ -252,27 +312,51 @@ public class User {
 }
 ```
 
-### Depois do Lombok (~15 linhas elegantes e legíveis)
+### Depois do Lombok (~25 linhas elegantes e expressivas)
 
 ```java
+import java.util.Objects;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
+    @Getter
     @EqualsAndHashCode.Include
-    private Long id;
+    private final Long id;
 
+    @Getter
     private String username;
+
     private String email;
 
     @ToString.Exclude
     private String password;
+
+    public User(Long id, String username, String email, String password) {
+        if (id == null) {
+            throw new IllegalArgumentException("O id não pode ser nulo");
+        }
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("O username não pode ser vazio");
+        }
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("O email não pode ser vazio");
+        }
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("A senha não pode ser vazia");
+        }
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public boolean matchesCredentials(String email, String rawPassword) {
+        return this.email.equals(email) && this.password.equals(rawPassword);
+    }
 }
 ```
 

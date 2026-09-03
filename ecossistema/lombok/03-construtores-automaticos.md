@@ -38,12 +38,15 @@ protected Client() {
 }
 ```
 
-> **Por que o construtor vazio existe e por que torná-lo `PROTECTED`?**
->
-> Muitas bibliotecas (como o Jackson para leitura de JSON e o Hibernate para
-> bancos de dados) exigem obrigatoriamente um construtor sem argumentos para
-> conseguir instanciar objetos e preencher seus dados automaticamente por
-> reflexão.
+**Quando Usar:**
+
+- **Exigência de Frameworks:** Muitas bibliotecas (como o Jackson para leitura
+  de JSON e o Hibernate/JPA para bancos de dados) exigem obrigatoriamente um
+  construtor sem argumentos para conseguir instanciar objetos e preencher seus
+  dados automaticamente usando _reflection_.
+
+> **Recomendação:** Use sempre `AccessLevel.PROTECTED` em conjunto com
+> `@NoArgsConstructor`!
 >
 > Ao definir `access = AccessLevel.PROTECTED`, nós **satisfazemos a exigência
 > dos frameworks** e, ao mesmo tempo, **protegemos nossa aplicação**, impedindo
@@ -76,12 +79,37 @@ public Client(Long id, String name, String email) {
 }
 ```
 
+**Quando Usar:**
+
+- **Classes de Transferência de Dados (DTOs):** Ideal para classes cuja
+  principal responsabilidade é transportar dados entre camadas sem carregar
+  lógica de negócio ou necessidade de ocultar algum desses dados.
+- **Base para Métodos de Fábrica Estáticos:** Como estudamos no [Capítulo de
+  Construtores do módulo de OO](../../02-oo/04-construtores.md), métodos de
+  fábrica estáticos são uma excelente prática para validar invariantes antes da
+  instanciação. Combinar `@AllArgsConstructor(access = AccessLevel.PRIVATE)` com
+  um método de fábrica manual é uma forma limpa de implementar esse padrão sem
+  precisar escrever construtores privados na mão.
+
+> **Dica de Design & Cuidados com Classes Inchadas:**
+>
+> Evite usar `@AllArgsConstructor` em classes com muitos atributos (ex: 8 ou 10
+> campos). Construtores gigantes são desconfortáveis de usar e propensos a erros
+> (como trocar a ordem de dois argumentos do mesmo tipo sem que o compilador
+> perceba).
+>
+> Além disso, uma classe com tantos parâmetros quase sempre é um _code smell_
+> (_Data Clumps_, em português _Aglutinação de Dados_), indicando que ela
+> assumiu responsabilidades demais e que alguns de seus campos poderiam ser
+> agrupados em tipos próprios (por exemplo, transformar `street`, `number`,
+> `city` e `zipCode` em uma classe `Address`).
+
 ### 3. Construtor para Campos Obrigatórios (`@RequiredArgsConstructor`)
 
-Gera um construtor que recebe apenas os campos que **obrigatoriamente precisam
+Gera um construtor que recebe **apenas os campos que obrigatoriamente precisam
 de um valor inicial**:
 
-- Campos marcados como `final` (que não podem ficar sem valor).
+- Campos marcados como `final` (que não podem ficar sem inicialização).
 - Campos anotados com `@NonNull` do Lombok (que realizam verificação automática
   contra `null`).
 
@@ -112,11 +140,90 @@ public BankAccount(String accountNumber, String owner) {
 }
 ```
 
-### Combinando Construtores com Segurança
+**Quando Usar:**
 
-Em classes que interagem com frameworks, é muito comum combinarmos
-`@NoArgsConstructor(access = AccessLevel.PROTECTED)` e `@AllArgsConstructor` na
-mesma classe:
+- **Injeção de Dependências:** É o padrão universal em classes de serviço,
+  repositórios e controladores (como em aplicações com Spring ou Quarkus). Você
+  declara as dependências como `private final UserRepository repository;` e o
+  `@RequiredArgsConstructor` cria o construtor exato que o container de injeção
+  precisa.
+- **Domínios com Valores Padrão:** Quando uma classe possui campos obrigatórios
+  para existir (como `accountNumber` e `owner`), mas outros atributos iniciam
+  com valores padrão ou são calculados posteriormente (como `balance = 0.0`).
+
+### Bússola de Decisão: Qual Construtor Escolher?
+
+| Anotação                                     | O que Gera                                  | Quando Usar                                                                          |
+| :------------------------------------------- | :------------------------------------------ | :----------------------------------------------------------------------------------- |
+| **`@NoArgsConstructor(access = PROTECTED)`** | `protected ClassName() { }`                 | Entidades JPA/Hibernate e DTOs que serão lidos pelo Jackson.                         |
+| **`@AllArgsConstructor`**                    | Construtor com todos os atributos           | DTOs e base para métodos estáticos privados.                                         |
+| **`@RequiredArgsConstructor`**               | Construtor para campos `final` e `@NonNull` | Injeção de dependências em Services/Controllers e entidades com campos obrigatórios. |
+
+## Integrando com Frameworks sem Perder o Encapsulamento
+
+Ao desenvolver aplicações com frameworks como Hibernate/JPA ou Jackson, nos
+deparamos com um dilema comum de arquitetura:
+
+1. **O framework exige** um construtor sem argumentos (`@NoArgsConstructor`)
+   para instanciar a classe via _reflection_.
+2. **A regra de negócio exige** que novos objetos criados pelo código da
+   aplicação sejam validados e contenham dados íntegros.
+
+Como já discutimos anteriormente, se simplesmente adicionarmos um construtor
+automático público em uma classe de domínio, abrimos uma brecha no
+encapsulamento: qualquer código poderá instanciar objetos com dados inválidos
+(como preços negativos ou nomes nulos), pois o Lombok não escreve validações.
+
+Para resolver esse dilema com elegância, existem duas abordagens recomendadas:
+
+### Abordagem 1: Construtor Manual com Validações
+
+Colocamos a anotação `@NoArgsConstructor(access = AccessLevel.PROTECTED)` para
+atender aos frameworks e escrevemos o construtor parametrizado explicitamente na
+mão com as validações necessárias. O Lombok detecta o construtor manual e não
+gera conflito:
+
+```java
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 🔒 Frameworks usam nos bastidores
+public class Product {
+    private Long id;
+    private String name;
+    private double price;
+
+    // Construtor público da aplicação com validações de negócio:
+    public Product(Long id, String name, double price) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("O nome do produto não pode ser vazio");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("O preço não pode ser negativo: " + price);
+        }
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+}
+```
+
+```java
+// O código da aplicação passa obrigatoriamente pelas validações:
+Product prod = new Product(1L, "Teclado", 250.0); // ✅ Válido
+
+// Instanciação vazia bloqueada para código externo:
+// Product invalid = new Product(); // ❌ Erro de compilação fora do pacote/herança!
+```
+
+### Abordagem 2: Construtor Privado do Lombok + Método de Fábrica Estático
+
+Se você prefere que o Lombok gere a atribuição mecânica dos campos, pode fechar
+a visibilidade do construtor completo tornando-o **privado** (`access =
+AccessLevel.PRIVATE`) e expor um **método de fábrica estático escrito
+manualmente** com as validações:
 
 ```java
 import lombok.AccessLevel;
@@ -125,51 +232,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // Frameworks usam nos bastidores
-@AllArgsConstructor // Código da aplicação usa para criar objetos válidos
-public class Product {
-    private Long id;
-    private String name;
-    private double price;
-}
-```
-
-```java
-// O código da aplicação é obrigado a fornecer todos os dados válidos:
-Product prod = new Product(1L, "Teclado", 250.0);
-
-// Product vazio é bloqueado para código externo:
-// Product invalid = new Product(); // ❌ Erro de compilação fora do pacote/herança!
-```
-
-### Validações na Criação e Métodos de Fábrica Estáticos
-
-Os construtores gerados pelo Lombok apenas realizam atribuições diretas aos
-campos. Se a sua classe precisa **validar regras de negócio no momento da
-criação** (por exemplo: garantir que um preço não seja negativo ou que o saldo
-respeite um limite mínimo):
-
-1. **Escreva o construtor manualmente:** O Lombok respeita construtores manuais.
-   Se você declarar um construtor explícito com validações, ele não tentará
-   sobrescrevê-lo.
-2. **Construtor Privado do Lombok + Método de Fábrica Estático Manual:** Podemos
-   instruir o Lombok a gerar o construtor com visibilidade **privada** (`access = AccessLevel.PRIVATE`)
-   para impedir que objetos sejam criados sem controle. Em seguida, escrevemos
-   um **método de fábrica estático manual** com as validações necessárias:
-
-```java
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE) // 🔒 Construtor privado gerado pelo Lombok
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 🔒 Usado por frameworks via reflection
+@AllArgsConstructor(access = AccessLevel.PRIVATE)  // 🔒 Bloqueia new Money(...) direto
 public class Money {
 
     private final double amount;
     private final String currency;
 
-    // Método de fábrica estático escrito manualmente com validações:
+    // Método de fábrica estático público com validações:
     public static Money of(double amount, String currency) {
         if (amount < 0) {
             throw new IllegalArgumentException("O valor monetário não pode ser negativo: " + amount);
@@ -182,7 +252,8 @@ public class Money {
 }
 ```
 
-Dessa forma, o código cliente é forçado a passar pelas validações de negócio:
+Dessa forma, o código cliente é forçado a passar pelas validações de negócio,
+mas pulamos a cerimônia de escrever o construtor completo:
 
 ```java
 Money price = Money.of(150.0, "BRL"); // ✅ Válido

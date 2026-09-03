@@ -80,10 +80,18 @@ O Jackson é dividido em três camadas modulares:
 Ao declarar o `jackson-databind` no Maven, ele traz automaticamente os outros
 dois módulos como dependências transitivas.
 
-## Configurando o Jackson no `pom.xml`
+## Configuração Prática (Setup)
 
-Para utilizar o Jackson em um projeto gerenciado pelo Maven, basta adicionar a
-dependência **`jackson-databind`** no seu arquivo `pom.xml`:
+A forma mais prática e recomendada de adicionar bibliotecas ao seu projeto é
+utilizando uma ferramenta de automação de _build_ como o **Apache Maven**. Se
+você ainda não tem familiaridade com o arquivo `pom.xml` ou com a estrutura de
+pastas padrão, confira o [Submódulo de
+Maven](../maven/01-fundamentos-e-estrutura.md).
+
+### Configuração no `pom.xml`
+
+Para utilizar o Jackson em um projeto com Maven, basta adicionar a dependência
+**`jackson-databind`** dentro do bloco `<dependencies>` no seu `pom.xml`:
 
 ```xml
 <dependencies>

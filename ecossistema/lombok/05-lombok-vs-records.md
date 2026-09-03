@@ -1,4 +1,4 @@
-# 5. Lombok vs Records
+# 5. Lombok vs Java Records: Quando Usar Cada Um?
 
 Com a chegada do Java 16, a linguagem introduziu um novo tipo nativo para
 representar dados concisos: os **Records**.

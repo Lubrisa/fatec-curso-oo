@@ -292,6 +292,14 @@ public class Box<T> {
 }
 ```
 
+> **E os métodos estáticos como `Result.ok(T data)`?**
+>
+> Por pertencerem à classe e não à instância, métodos estáticos não conseguem
+> reaproveitar o `<T>` declarado no cabeçalho da classe. Se você reparou naquele
+> `<T>` antes do tipo de retorno lá no `Result.ok(...)`, não se preocupe: no
+> próximo capítulo vamos entender exatamente como e por que declaramos tipos
+> genéricos diretamente em métodos!
+
 ### 2. Não é possível instanciar o tipo genérico diretamente (`new T()`)
 
 O Java não permite escrever `T item = new T();` dentro de uma classe genérica.

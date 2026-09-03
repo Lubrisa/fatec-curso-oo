@@ -51,9 +51,9 @@ individualmente e passa pelas etapas de processamento:
 graph LR
     subgraph "Processamento no Pipeline (Elemento a Elemento)"
         E["Elemento da Fonte"] --> F["1. filter(balance &gt; 0)"]
-        F -->|Aprovado| M["2. map(getHolder)"]
+        F -->|Aprovado| M["2. map(getOwner)"]
         F -.->|Reprovado| D["Descartado"]
-        M -->|valor de holder| T["3. toList() / Coleta"]
+        M -->|nome do titular| T["3. toList() / Coleta"]
     end
 ```
 
@@ -219,8 +219,8 @@ Transforma cada elemento de entrada do tipo `T` em um elemento de saída do tipo
 
 ```java
 // Converte uma Stream<BankAccount> em uma Stream<String> com os nomes dos titulares:
-List<String> holders = accounts.stream()
-    .map(BankAccount::getHolder)
+List<String> owners = accounts.stream()
+    .map(BankAccount::getOwner)
     .toList();
 ```
 
@@ -311,9 +311,9 @@ activeAccounts.sort(new Comparator<BankAccount>() {
     }
 });
 
-List<String> top3Holders = new ArrayList<>();
+List<String> top3Owners = new ArrayList<>();
 for (int i = 0; i < Math.min(3, activeAccounts.size()); i++) {
-    top3Holders.add(activeAccounts.get(i).getHolder().toUpperCase());
+    top3Owners.add(activeAccounts.get(i).getOwner().toUpperCase());
 }
 ```
 
@@ -321,10 +321,10 @@ for (int i = 0; i < Math.min(3, activeAccounts.size()); i++) {
 
 ```java
 // ✅ Abordagem funcional: cada linha expressa exatamente uma intenção de negócio
-List<String> top3Holders = accounts.stream()
+List<String> top3Owners = accounts.stream()
     .filter(BankAccount::isActive)                                     // 1. Apenas contas ativas
     .sorted(Comparator.comparing(BankAccount::getBalance).reversed())  // 2. Ordenadas do maior para o menor saldo
-    .map(BankAccount::getHolder)                                       // 3. Extrai apenas o nome do titular
+    .map(BankAccount::getOwner)                                        // 3. Extrai apenas o nome do titular
     .map(String::toUpperCase)                                          // 4. Converte para letras maiúsculas
     .limit(3)                                                          // 5. Pega os 3 primeiros
     .toList();                                                         // 6. Coleta na lista final
@@ -351,6 +351,6 @@ dados em relatórios sofisticados.
 
 ---
 
-<a href="04-optional.md">← 4. Tratamento de Ausência com Optional</a>
+<a href="04-optional.md">← Tratamento de Ausência com Optional</a>
 
-<p align="right"><a href="06-streams-coletores-e-reducao.md">Próximo: Streams API — Redução e Coletores →</a></p>
+<p align="right"><a href="06-streams-coletores-e-reducao.md">Próximo: Streams API: Redução e Coletores →</a></p>

@@ -53,6 +53,19 @@ Observe a anatomia da assinatura:
 | `getFirst`       | Nome do método                                          |
 | `(List<T> list)` | Parâmetro que recebe uma lista de elementos do tipo `T` |
 
+> **Conectando com o Capítulo Anterior:**
+>
+> Lembra da fábrica estática `Result.ok(T data)` do [capítulo
+> anterior](02-classes-e-interfaces-genericas.md#caso-de-uso-real-objeto-de-resultado-resultt)?
+>
+> ```java
+> public static <T> Result<T> ok(T data) { ... }
+> ```
+>
+> Ela é exatamente um método genérico! Como o método é `static`, ele não tem
+> acesso ao `T` da classe `Result<T>` — por isso precisou declarar seu próprio
+> `<T>` antes do retorno `Result<T>`.
+
 ### Invocando o Método (Inferência de Tipo)
 
 Ao chamar o método, o compilador do Java analisa o tipo do argumento passado e
@@ -91,7 +104,11 @@ public class CollectionUtils {
 Map<String, BankAccount> accountMap = CollectionUtils.ofSingleEntry("001", account);
 ```
 
+> **Nota:** Embora o caso de uso mais comum para métodos genéricos seja em
+> utilitários e fábricas estáticas, eles também podem ser declarados em métodos
+> de instância comuns (sem `static`) quando necessário.
+
 ---
 
-<a href="02-classes-e-interfaces-genericas.md">← 2. Classes e Interfaces
+<a href="02-classes-e-interfaces-genericas.md">← Classes e Interfaces
 Genéricas</a>

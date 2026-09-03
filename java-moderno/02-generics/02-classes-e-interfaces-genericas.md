@@ -312,6 +312,6 @@ construtor ou parâmetro de método).
 
 ---
 
-<a href="01-fundamentos.md">← 1. Fundamentos de Generics</a>
+<a href="01-fundamentos.md">← Fundamentos de Generics</a>
 
 <p align="right"><a href="03-metodos-genericos.md">Próximo: Métodos Genéricos →</a></p>

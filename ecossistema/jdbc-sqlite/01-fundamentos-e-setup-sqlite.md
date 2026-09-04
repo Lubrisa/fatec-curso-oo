@@ -63,10 +63,18 @@ escolha ideal:
 > [Documentação Oficial do SQLite](https://www.sqlite.org/lang.html) e o [Guia
 > de SQL do W3Schools](https://www.w3schools.com/sql/).
 
-## Configurando o Driver SQLite no `pom.xml`
+## Configuração Prática (Setup)
 
-Para utilizar o SQLite em nosso projeto Maven, adicionamos o driver
-**`sqlite-jdbc`** no arquivo `pom.xml`:
+A forma mais prática e recomendada de adicionar bibliotecas ao seu projeto é
+utilizando uma ferramenta de automação de _build_ como o **Apache Maven**. Se
+você ainda não tem familiaridade com o arquivo `pom.xml` ou com a estrutura de
+pastas padrão, confira o [Submódulo de
+Maven](../maven/01-fundamentos-e-estrutura.md).
+
+### Configuração no `pom.xml`
+
+Para utilizar o SQLite em um projeto com Maven, adicionamos o driver
+**`sqlite-jdbc`** dentro do bloco `<dependencies>` no seu `pom.xml`:
 
 ```xml
 <dependencies>

@@ -79,126 +79,124 @@ que já havia sido executado, voltando exatamente ao estado inicial.
 
 ## Gerenciamento de Transações no JDBC
 
-Para assumir o controle manual das transações no JDBC, seguimos quatro passos:
+O ciclo de vida de uma transação manual no JDBC envolve desativar o
+_auto-commit_, executar as operações e ramificar o resultado entre confirmação
+(`commit`) ou cancelamento (`rollback`):
 
-1. **Desativar o _Auto-Commit_:** Informamos ao driver que não queremos gravar
-   cada comando imediatamente:
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Aplicação (Java)
+    participant Conn as Connection
+    participant DB as Banco de Dados
 
-   ```java
-   conn.setAutoCommit(false);
-   ```
+    App->>Conn: conn.setAutoCommit(false)
+    Note over Conn,DB: Início da Transação Manual
 
-2. **Executar os Comandos SQL:** Executamos todas as instruções necessárias
-   dentro da transação.
+    App->>DB: Executa Operação 1 (ex: UPDATE conta Alice)
+    App->>DB: Executa Operação 2 (ex: UPDATE conta Bob)
 
-3. **Confirmar a Transação (_Commit_):** Se todos os comandos rodarem sem nenhum
-   erro, gravamos as alterações em definitivo:
+    alt Todas as operações bem-sucedidas (sem erros)
+        App->>Conn: conn.commit()
+        Conn->>DB: Grava alterações em definitivo ✅
+    else Ocorreu algum erro ou exceção (bloco catch)
+        App->>Conn: conn.rollback()
+        Conn->>DB: Desfaz todas as alterações pendentes ❌
+    end
 
-   ```java
-   conn.commit();
-   ```
+    Note over App,Conn: Bloco finally
+    App->>Conn: conn.setAutoCommit(true)
+    Note over Conn,DB: Restaura configuração padrão
+```
 
-4. **Desfazer a Transação (_Rollback_):** Se qualquer exceção for lançada,
-   desfazemos todas as alterações no bloco `catch`:
+### As Etapas do Ciclo Transacional
 
-   ```java
-   conn.rollback();
-   ```
+1. **Desativar o _Auto-Commit_ (`conn.setAutoCommit(false)`):** Avisa ao driver
+   que os próximos comandos não devem ser gravados imediatamente, iniciando a
+   transação manual.
+2. **Executar as Instruções:** Executamos todos os `Statement` ou
+   `PreparedStatement` necessários dentro da lógica de negócio.
+3. **Confirmar (`conn.commit()`) ou Desfazer (`conn.rollback()`) as Operações:**
+   Se todos os passos foram concluídos sem exceções, o `commit()` grava todas as
+   alterações no disco de uma só vez. Se qualquer erro acontecer no meio do
+   caminho, o bloco `catch` intercepta a falha e chama `rollback()`, descartando
+   todas as alterações pendentes e restaurando o banco ao estado original.
+4. **Restaurar o _Auto-Commit_ no `finally` (`conn.setAutoCommit(true)`):**
+   Garante que a conexão retorne ao comportamento padrão antes de ser
+   reutilizada.
 
 ## Exemplo Completo e Seguro
 
 Veja como implementar a transferência bancária protegida por transação:
 
 ```java
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+public void transfer(long fromId, long toId, double amount, Connection conn) throws SQLException {
+    String sqlDebit = """
+        UPDATE accounts
+        SET balance = balance - ?
+        WHERE id = ?;
+        """;
 
-public class TransactionDemo {
+    String sqlCredit = """
+        UPDATE accounts
+        SET balance = balance + ?
+        WHERE id = ?;
+        """;
 
-    public static void transferMoney(String url, long fromId, long toId, double amount) {
-        String sqlDebit = """
-                          UPDATE accounts
-                          SET balance = balance - ?
-                          WHERE id = ?;
-                          """;
+    try {
+        // 1. Desativamos o auto-commit para iniciar a transação manual:
+        conn.setAutoCommit(false);
 
-        String sqlCredit = """
-                           UPDATE accounts
-                           SET balance = balance + ?
-                           WHERE id = ?;
-                           """;
-
-        Connection conn = null;
-
-        try {
-
-            conn = DriverManager.getConnection(url);
-
-            // 1. Desativamos o auto-commit para iniciar a transação manual:
-            conn.setAutoCommit(false);
-
-            // 2. Operação 1: Debitar da conta de origem
-            try (PreparedStatement stmtDebit = conn.prepareStatement(sqlDebit)) {
-                stmtDebit.setDouble(1, amount);
-                stmtDebit.setLong(2, fromId);
-                stmtDebit.executeUpdate();
-            }
-
-            // 3. Operação 2: Creditar na conta de destino
-            try (PreparedStatement stmtCredit = conn.prepareStatement(sqlCredit)) {
-                stmtCredit.setDouble(1, amount);
-                stmtCredit.setLong(2, toId);
-                stmtCredit.executeUpdate();
-            }
-
-            // 4. Se chegou até aqui sem erros, confirmamos tudo:
-            conn.commit();
-            System.out.println("Transferência de R$ " + amount + " concluída com sucesso!");
-
-        } catch (Exception e) {
-
-            System.err.println("Falha na transferência! Cancelando operações: " + e.getMessage());
-
-            // 5. Ocorreu erro: desfazemos tudo o que foi feito nesta transação:
-            if (conn != null) {
-                try {
-                    conn.rollback();
-                    System.err.println("Rollback executado: banco restaurado ao estado original.");
-                } catch (SQLException ex) {
-                    System.err.println("Erro crítico ao executar rollback: " + ex.getMessage());
-                }
-            }
-
-        } finally {
-
-            // 6. Restauramos o auto-commit e fechamos a conexão:
-            if (conn != null) {
-                try {
-                    conn.setAutoCommit(true);
-                    conn.close();
-                } catch (SQLException e) {
-                    System.err.println("Erro ao fechar conexão: " + e.getMessage());
-                }
-            }
+        // 2. Operação 1: Debitar da conta de origem
+        try (PreparedStatement stmtDebit = conn.prepareStatement(sqlDebit)) {
+            stmtDebit.setDouble(1, amount);
+            stmtDebit.setLong(2, fromId);
+            stmtDebit.executeUpdate();
         }
+
+        // 3. Operação 2: Creditar na conta de destino
+        try (PreparedStatement stmtCredit = conn.prepareStatement(sqlCredit)) {
+            stmtCredit.setDouble(1, amount);
+            stmtCredit.setLong(2, toId);
+            stmtCredit.executeUpdate();
+        }
+
+        // 4. Se chegou até aqui sem erros, confirmamos tudo:
+        conn.commit();
+        System.out.println("Transferência de R$ " + amount + " concluída com sucesso!");
+    } catch (SQLException e) {
+        // 5. Ocorreu erro: desfazemos as alterações e relançamos o erro para a camada superior:
+        conn.rollback();
+        throw e;
+    } finally {
+        // 6. Restauramos o auto-commit para o estado padrão:
+        conn.setAutoCommit(true);
     }
 }
 ```
 
-> **Por que restaurar o `autoCommit(true)`?**
+> **Porque usar `finally` para restaurar o `autoCommit`?**
 >
-> Em sistemas reais e servidores de produção, é comum o uso de **pools de
-> conexões** (onde as conexões com o banco são recicladas e reutilizadas por
-> diferentes partes do sistema em vez de serem destruídas). Se uma conexão for
-> devolvida ao pool com `autoCommit(false)`, outras operações simples podem não
-> ser gravadas no banco por acidente, gerando comportamentos imprevisíveis. Por
-> isso, sempre restaure o estado padrão da conexão no bloco `finally`.
+> Em sistemas reais e servidores de produção, é padrão utilizar **pools de
+> conexões** (como HikariCP), onde conexões são recicladas e reutilizadas em vez
+> de serem criadas do zero para melhorar o desempenho.
+>
+> Se uma conexão for devolvida ao pool com `autoCommit(false)`, operações
+> subsequentes de outras partes do sistema podem não ser salvas no banco por
+> acidente. Por isso, **sempre restaure o estado padrão
+> (`conn.setAutoCommit(true)`) no bloco `finally`**.
 
-No próximo capítulo, aprenderemos como organizar e encapsular todas as nossas
-operações de banco de dados em uma arquitetura limpa e sustentável através do
-**Padrão DAO (_Data Access Object_)**.
+## Concorrência e _Thread-Safety_
+
+Objetos `Connection` do JDBC **não são seguros para uso concorrente
+(_thread-safe_)**.
+
+Nunca compartilhe a mesma instância de `Connection` entre múltiplas _threads_ ou
+execuções simultâneas. Se duas partes da aplicação utilizarem a mesma conexão ao
+mesmo tempo, uma pode desativar o _auto-commit_ ou chamar `commit()` /
+`rollback()` afetando as operações da outra sem aviso prévio, causando corrupção
+ou perda de dados. Cada operação ou _thread_ deve possuir sua própria conexão
+exclusiva.
 
 ---
 

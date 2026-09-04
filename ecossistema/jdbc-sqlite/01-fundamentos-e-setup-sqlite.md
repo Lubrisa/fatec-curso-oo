@@ -52,6 +52,17 @@ escolha ideal:
 - **Conformidade SQL:** Suporta SQL padrão, chaves primárias, chaves
   estrangeiras e transações ACID completas.
 
+> **Pré-requisitos e Dialeto SQL:**
+>
+> Este módulo pressupõe que você já possui noções básicas sobre os comandos da
+> linguagem SQL (como `CREATE TABLE`, `INSERT`, `UPDATE`, `DELETE` e `SELECT`).
+> Nosso foco é aprender como integrar, executar e gerenciar essas operações a
+> partir de código Java via JDBC.
+>
+> Caso queira consultar comandos ou revisar a sintaxe do SQLite, recomendamos a
+> [Documentação Oficial do SQLite](https://www.sqlite.org/lang.html) e o [Guia
+> de SQL do W3Schools](https://www.w3schools.com/sql/).
+
 ## Configurando o Driver SQLite no `pom.xml`
 
 Para utilizar o SQLite em nosso projeto Maven, adicionamos o driver

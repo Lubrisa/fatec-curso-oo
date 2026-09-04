@@ -94,6 +94,77 @@ System.out.println(json);
 // Observe que o campo 'password' foi omitido com segurança!
 ```
 
+### Ocultando Apenas na Serialização
+
+A anotação `@JsonIgnore` faz com que o campo seja completamente ignorado tanto
+na serialização quanto na desserialização.
+
+Caso você precise que a propriedade seja **lida ao desserializar** (por exemplo,
+ao receber os dados de um formulário de cadastro), mas **nunca devolvida ao
+serializar** (para não vazar o dado em respostas JSON ou logs), você pode adotar
+uma das duas abordagens abaixo:
+
+#### Opção 1: `@JsonProperty` com `WRITE_ONLY`
+
+Podemos configurar a propriedade `access` diretamente no atributo:
+
+```java
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class UserAccount {
+    private String username;
+    private String email;
+
+    // Permite ler a senha no JSON de entrada, mas nunca a inclui na saída:
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    // Construtores, getters e setters...
+}
+```
+
+Essa opção é prática e rápida quando temos uma única classe e poucos campos que
+precisam desse comportamento. No entanto, se o modelo começar a acumular muitas
+regras de serialização ou campos com visibilidades diferentes, a classe pode
+ficar poluída e difícil de manter. Nesses cenários, é muito mais adequado seguir
+com a abordagem abaixo.
+
+#### Opção 2: Objetos de Transferência de Dados (DTOs)
+
+Um **DTO (_Data Transfer Object_)** é um padrão de projeto em que criamos
+classes simples cujo único propósito é transportar dados entre camadas ou pela
+rede. Em vez de reaproveitar a mesma classe para entrada e saída, criamos
+classes especializadas para cada direção:
+
+- **`UserRegistrationRequest` (Entrada):** Representa exatamente o que o cliente
+  envia ao criar a conta, contendo o campo de senha.
+- **`UserResponse` (Saída):** Representa o que o servidor devolve ao cliente,
+  **sem sequer declarar** o campo de senha.
+
+```java
+// DTO para receber os dados do cadastro:
+public class UserRegistrationRequest {
+    private String username;
+    private String email;
+    private String password; // Necessário para criar a conta
+
+    // Construtores, getters e setters...
+}
+
+// DTO para responder consultas de usuário:
+public class UserResponse {
+    private Long id;
+    private String username;
+    private String email;
+    // Sem campo de senha! Não há risco de vazamento de dados.
+
+    // Construtores, getters e setters...
+}
+```
+
+Ao separar os DTOs de requisição e resposta, o contrato da API fica explícito,
+eliminamos o excesso de anotações e garantimos a segurança por _design_.
+
 ## Omitindo Campos Nulos (`@JsonInclude`)
 
 Por padrão, quando um atributo do objeto tem valor `null`, o Jackson inclui a
@@ -155,10 +226,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 // Se o JSON contiver "humidity", "wind_speed", etc., o Jackson simplesmente ignorará!
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherResponse {
-  private String city;
-  private double temperature;
+    private String city;
+    private double temperature;
 
-  // Construtores, getters e setters...
+    // Construtores, getters e setters...
 }
 ```
 
@@ -186,3 +257,5 @@ mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 ---
 
 <a href="02-object-mapper-e-operacoes-basicas.md">← ObjectMapper e Operações Básicas</a>
+
+<p align="right"><a href="04-records-enums-e-datas.md">Próximo: Records, Enums e Datas no Jackson →</a></p>

@@ -11,7 +11,7 @@ o tipo da chave e `V` para o tipo do valor. As três implementações mais comun
 são `HashMap`, `LinkedHashMap` e `TreeMap`.
 
 > O `Map<K, V>` é um tipo genérico com dois parâmetros (detalhado no [Guia de
-> Generics](../../java-moderno/02-generics/01-fundamentos.md)). Você substitui
+> Generics](../03-java-in-depth/02-generics/01-fundamentos.md)). Você substitui
 > `K` e `V` pelos tipos concretos (por exemplo: `Map<String, BankAccount>`) e o
 > compilador garante a consistência de ambos.
 

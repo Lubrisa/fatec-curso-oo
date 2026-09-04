@@ -270,7 +270,7 @@ recursos fundamentais da linguagem Java:
 
 > Se quiser entender os detalhes internos de como a JVM lida com tipos genéricos
 > no geral, confira o tópico sobre [_Type Erasure_ no final do primeiro capítulo
-> do módulo de Generics](../../java-moderno/02-generics/01-fundamentos.md).
+> do módulo de Generics](../../03-java-in-depth/02-generics/01-fundamentos.md).
 
 </details>
 

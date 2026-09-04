@@ -10,7 +10,7 @@ A interface `Set<E>` define o contrato. Suas implementações mais comuns são
 `HashSet`, `LinkedHashSet` e `TreeSet`.
 
 > O `<E>` indica que `Set` é um tipo genérico (detalhado no [Guia de
-> Generics](../../java-moderno/02-generics/01-fundamentos.md)). Você substitui
+> Generics](../03-java-in-depth/02-generics/01-fundamentos.md)). Você substitui
 > `E` pelo tipo dos elementos (`String`, `Integer`, etc.) e o compilador passa a
 > garantir a integridade do tipo.
 

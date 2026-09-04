@@ -31,7 +31,7 @@ Java representa essas coleções através de duas interfaces principais:
   como **Fila** quanto como **Pilha**.
 
 > A notação `<E>` indica o uso de tipos genéricos (detalhado no [Guia de
-> Generics](../../java-moderno/02-generics/01-fundamentos.md)).
+> Generics](../03-java-in-depth/02-generics/01-fundamentos.md)).
 
 A implementação recomendada para ambos os casos é o **`ArrayDeque`**.
 

@@ -115,46 +115,39 @@ Veja como a consulta de autenticação fica 100% protegida com o
 `PreparedStatement`:
 
 ```java
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+String emailInput = "admin@email.com' OR '1'='1"; // Tentativa maliciosa
+String passwordInput = "qualquerCoisa";
 
-public class SafeLoginDemo {
-    public static void main(String[] args) {
-        String url = "jdbc:sqlite:loja.db";
+String sql = """
+    SELECT *
+    FROM users
+    WHERE email = ? AND password = ?;
+    """;
 
-        String emailInput = "admin@email.com' OR '1'='1"; // Tentativa maliciosa
-        String passwordInput = "qualquerCoisa";
+try (Connection conn = DriverManager.getConnection(url);
+     PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        String sql = """
-                     SELECT *
-                     FROM users
-                     WHERE email = ? AND password = ?;
-                     """;
+    // Preenchendo os parâmetros de forma segura:
+    pstmt.setString(1, emailInput);
+    pstmt.setString(2, passwordInput);
 
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Preenchendo os parâmetros de forma segura:
-            pstmt.setString(1, emailInput);
-            pstmt.setString(2, passwordInput);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    System.out.println("Login efetuado com sucesso!");
-                } else {
-                    System.out.println("Usuário ou senha inválidos.");
-                }
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro na consulta: " + e.getMessage());
+    try (ResultSet rs = pstmt.executeQuery()) {
+        if (rs.next()) {
+            System.out.println("Login efetuado com sucesso!");
+        } else {
+            System.out.println("Usuário ou senha inválidos.");
         }
     }
 }
 ```
+
+> **Nota sobre `executeQuery()` e `ResultSet`:**
+>
+> Em consultas de leitura (`SELECT`), o método `executeQuery()` retorna um
+> objeto **`ResultSet`**, que representa o conjunto de linhas devolvidas pelo
+> banco (o método `rs.next()` avança para a próxima linha). Não se preocupe com
+> os detalhes do `ResultSet` agora: exploraremos a fundo todas as operações de
+> consulta no **Capítulo 05 (Operações de Leitura)**.
 
 Ao executar o código acima, o banco procurará um usuário cujo e-mail seja
 **literalmente** `"admin@email.com' OR '1'='1"`, o que não encontrará nenhum
@@ -177,8 +170,9 @@ try (Connection conn = DriverManager.getConnection(url);
 
     for (String cat : categories) {
         pstmt.setString(1, cat);
-        pstmt.executeUpdate();
+        pstmt.executeUpdate(); // Executa o comando de escrita (detalhado no Capítulo 04)
     }
+
     System.out.println("Todas as categorias foram inseridas com alto desempenho!");
 }
 ```
@@ -189,10 +183,6 @@ try (Connection conn = DriverManager.getConnection(url);
 >
 > Utilize sempre o **`PreparedStatement`** para qualquer instrução que envolva
 > parâmetros ou variáveis.
-
-No próximo capítulo, aprenderemos detalhadamente como realizar todas as
-**operações de escrita** (`INSERT`, `UPDATE` e `DELETE`) e como recuperar chaves
-primárias geradas automaticamente pelo banco.
 
 ---
 

@@ -1,0 +1,6 @@
+{
+  "name": "Programação Orientada a Objetos — FATEC",
+  "description": "Material didático completo e leitor interativo do curso de Programação Orientada a Objetos (POO) da FATEC",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

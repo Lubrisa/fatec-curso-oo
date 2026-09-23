@@ -24,7 +24,7 @@ flowchart TD
     subgraph Eixos ["Eixos Temáticos (Desacoplados / Estudo Livre)"]
         direction TB
         TESTES["🧪 Testes de Software\n(JUnit 5, Mockito)"]
-        ECO["🛠️ Ecossistema\n(Maven, Lombok, Jackson, JDBC, JPA)"]
+        ECO["🛠️ Ecossistema\n(Maven, Lombok, Jackson, JDBC, JPA, Spring Boot)"]
         APIS["🌐 APIs da Plataforma\n(Data/Hora, NIO.2, HttpClient, Virtual Threads)"]
         OOA["🏛️ OO Avançado & Design\n(SOLID, Design Patterns, Object Calisthenics)"]
     end
@@ -187,6 +187,22 @@ JSON e persistência relacional.
 |  3  | [03-mapeamento-de-entidades.md](ecossistema/hibernate-jpa/03-mapeamento-de-entidades.md)                 | `@Entity`, `@Id`, estratégias de chave, embutidos (`@EmbeddedId`), datas e enums    |
 |  4  | [04-entity-manager-e-operacoes-crud.md](ecossistema/hibernate-jpa/04-entity-manager-e-operacoes-crud.md) | `EntityManager`, ciclo de vida das entidades (4 estados JPA), transações e CRUD     |
 |  5  | [05-consultas-com-jpql.md](ecossistema/hibernate-jpa/05-consultas-com-jpql.md)                           | Consultas orientadas a objetos com JPQL, parâmetros seguros, paginação e agregações |
+
+#### Spring Boot (`ecossistema/spring-boot/`)
+
+Guia prático e conceitual cobrindo a arquitetura moderna com Inversão de
+Controle (IoC), Spring Data JPA com MySQL, APIs RESTful semânticas, tratamento
+global de exceções (RFC 7807) e Server-Side Rendering com Thymeleaf.
+
+👉 **[Acessar Guia Completo do Spring Boot](ecossistema/spring-boot/README.md)**
+
+| Submódulo                     | Diretório                                                                                                                   | Foco Temático                                                                           |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| **01 · Base e Arquitetura**   | [`01-base-e-arquitetura/`](ecossistema/spring-boot/01-base-e-arquitetura/01-introducao-e-filosofia-spring.md)               | IoC, ciclo de vida de Beans, injeção por construtor e convenções                        |
+| **02 · Persistência e Dados** | [`02-persistencia-e-dados/`](ecossistema/spring-boot/02-persistencia-e-dados/01-configuracao-datasource-mysql.md)           | Datasource MySQL, Entidades JPA, `JpaRepository`, `@Service` e `@Transactional`         |
+| **03 · Web e Controllers**    | [`03-web-e-controllers/`](ecossistema/spring-boot/03-web-e-controllers/01-rest-controllers-e-verbos-http.md)                | `@RestController`, `@PathVariable`, `@RequestBody`, DTOs com Records e `ResponseEntity` |
+| **04 · Tratamento de Erros**  | [`04-tratamento-de-erros/`](ecossistema/spring-boot/04-tratamento-de-erros/01-excecoes-em-apis-e-respostas-padronizadas.md) | RFC 7807, classe nativa `ProblemDetail` e `@RestControllerAdvice`                       |
+| **05 · MVC e Views**          | [`05-mvc-e-views/`](ecossistema/spring-boot/05-mvc-e-views/01-o-padrao-mvc-classico-no-spring.md)                           | SSR com Thymeleaf, objeto `Model`, diretivas `th:*` e padrão PRG                        |
 
 ### 🧪 Eixo: Testes de Software (`testes/`) — Backlog
 

@@ -71,7 +71,7 @@ padronize o formato de erro retornado aos clientes da API.
 
 | Cap | Arquivo                                                                                                                       | Assunto                                                                        |
 | :-: | :---------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
-| 01  | [01-excecoes-em-apis-e-respostas-padronizadas.md](04-tratamento-de-erros/01-excecoes-em-apis-e-respostas-padronizadas.md)     | Perigos de stack trace e especificação de um contrato JSON de erro consistente |
+| 01  | [01-excecoes-em-apis-e-respostas-padronizadas.md](04-tratamento-de-erros/01-excecoes-em-apis-e-respostas-padronizadas.md)     | Perigos de stack trace, especificação RFC 7807 e classe nativa `ProblemDetail` |
 | 02  | [02-rest-controller-advice-e-exception-handlers.md](04-tratamento-de-erros/02-rest-controller-advice-e-exception-handlers.md) | Interceptação global com `@RestControllerAdvice` e handlers especializados     |
 
 ### 🖥️ 05 · MVC e Views (`05-mvc-e-views/`)
